@@ -1,6 +1,6 @@
 version: '0.1'
 
-namespace: zed-dev-skills_dev
+namespace: zed-dev-skill_dev
 tag: 'dev'
 
 environment: docker.dev
