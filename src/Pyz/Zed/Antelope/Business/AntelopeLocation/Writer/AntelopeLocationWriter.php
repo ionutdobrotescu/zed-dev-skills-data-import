@@ -1,14 +1,14 @@
 <?php
 
-namespace Pyz\Zed\Training\Business\Writer;
+namespace Pyz\Zed\Antelope\Business\AntelopeLocation\Writer;
 
 use Generated\Shared\Transfer\AntelopeLocationTransfer;
-use Pyz\Zed\Training\Persistence\TrainingEntityManagerInterface;
+use Pyz\Zed\Antelope\Persistence\AntelopeEntityManagerInterface;
 
 class AntelopeLocationWriter
 {
     public function __construct(
-        protected TrainingEntityManagerInterface $entityManager
+        protected AntelopeEntityManagerInterface $entityManager
     ) {
     }
 

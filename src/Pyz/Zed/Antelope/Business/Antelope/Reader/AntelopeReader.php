@@ -1,6 +1,6 @@
 <?php
 
-namespace Pyz\Zed\Antelope\Business\Reader;
+namespace Pyz\Zed\Antelope\Business\Antelope\Reader;
 
 use Generated\Shared\Transfer\AntelopeCriteriaTransfer;
 use Generated\Shared\Transfer\AntelopeResponseTransfer;
@@ -19,10 +19,8 @@ class AntelopeReader
         $antelopeTransfer = $this->antelopeRepository->getAntelope($antelopeCriteriaTransfer);
         $antelopeResponseTransfer = new AntelopeResponseTransfer();
         $antelopeResponseTransfer->setIsSuccessFul(false);
-        if ($antelopeTransfer) {
-            $antelopeResponseTransfer->setAntelope($antelopeTransfer);
-            $antelopeResponseTransfer->setIsSuccessFul(true);
-        }
+        $antelopeResponseTransfer->setAntelope($antelopeTransfer);
+        $antelopeResponseTransfer->setIsSuccessFul(true);
         return $antelopeResponseTransfer;
     }
 }
