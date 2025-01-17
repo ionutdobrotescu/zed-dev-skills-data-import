@@ -4,10 +4,11 @@ namespace Pyz\Zed\Antelope\Communication\Controller;
 
 use Generated\Shared\Transfer\AntelopeCriteriaTransfer;
 use Generated\Shared\Transfer\AntelopeResponseTransfer;
+use Pyz\Zed\Antelope\Business\AntelopeFacadeInterface;
 use Spryker\Zed\Kernel\Communication\Controller\AbstractGatewayController;
 
 /**
- * @method \Pyz\Zed\Antelope\Business\AntelopeFacadeInterface getFacade()
+ * @method AntelopeFacadeInterface getFacade()
  */
 class GatewayController extends AbstractGatewayController
 {

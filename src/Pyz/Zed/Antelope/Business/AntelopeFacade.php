@@ -6,10 +6,11 @@ use Generated\Shared\Transfer\AntelopeCriteriaTransfer;
 use Generated\Shared\Transfer\AntelopeLocationTransfer;
 use Generated\Shared\Transfer\AntelopeResponseTransfer;
 use Generated\Shared\Transfer\AntelopeTransfer;
+use Pyz\Zed\Antelope\Persistence\Exception\EntityNotFoundException;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 
 /**
- * @method  \Pyz\Zed\Antelope\Business\AntelopeBusinessFactory getFactory()
+ * @method  AntelopeBusinessFactory getFactory()
  */
 class AntelopeFacade extends AbstractFacade implements AntelopeFacadeInterface
 {
@@ -18,6 +19,9 @@ class AntelopeFacade extends AbstractFacade implements AntelopeFacadeInterface
         return $this->getFactory()->createAntelopeWriter()->createAntelope($antelopeTransfer);
     }
 
+    /**
+     * @throws EntityNotFoundException
+     */
     public function getAntelopeLocationById(
         int $idLocation
     ): ?AntelopeLocationTransfer {

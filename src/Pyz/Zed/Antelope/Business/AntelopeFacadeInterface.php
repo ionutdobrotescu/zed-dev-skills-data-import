@@ -9,7 +9,7 @@ use Generated\Shared\Transfer\AntelopeResponseTransfer;
 use Generated\Shared\Transfer\AntelopeTransfer;
 
 /**
- * @method  \Pyz\Zed\Antelope\Business\AntelopeBusinessFactory getFactory()
+ * @method  AntelopeBusinessFactory getFactory()
  */
 interface AntelopeFacadeInterface
 {

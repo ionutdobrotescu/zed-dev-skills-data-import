@@ -18,9 +18,7 @@ class AntelopeGuiDependencyProvider extends AbstractBundleDependencyProvider
         $container = parent::provideCommunicationLayerDependencies($container);
 
         $container = $this->addAntelopeFacade($container);
-        $container = $this->addAntelopePropelQuery($container);
-
-        return $container;
+        return $this->addAntelopePropelQuery($container);
     }
 
     protected function addAntelopeFacade(Container $container): Container
