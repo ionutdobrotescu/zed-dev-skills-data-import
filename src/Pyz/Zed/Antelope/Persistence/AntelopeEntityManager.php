@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Pyz\Zed\Antelope\Persistence;
 
 use Generated\Shared\Transfer\AntelopeLocationTransfer;
 use Generated\Shared\Transfer\AntelopeTransfer;
 use Orm\Zed\Antelope\Persistence\PyzAntelope;
 use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
+use Orm\Zed\Antelope\Persistence\PyzAntelopeLocation;
 
 class AntelopeEntityManager extends AbstractEntityManager implements
     AntelopeEntityManagerInterface

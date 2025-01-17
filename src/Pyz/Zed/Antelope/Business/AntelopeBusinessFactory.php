@@ -21,6 +21,12 @@ class AntelopeBusinessFactory extends AbstractBusinessFactory
         return new AntelopeWriter($this->getEntityManager());
     }
 
+    public function createAntelopeLocationWriter(): AntelopeLocationWriter
+    {
+        return new AntelopeLocationWriter($this->getEntityManager());
+    }
+
+
     public function createAntelopeReader(): AntelopeReader
     {
         return new AntelopeReader($this->getRepository());
@@ -31,8 +37,5 @@ class AntelopeBusinessFactory extends AbstractBusinessFactory
         return new AntelopeLocationReader($this->getRepository());
     }
 
-    public function createAntelopeLocationWriter(): AntelopeLocationWriter
-    {
-        return new AntelopeLocationWriter($this->getEntityManager());
-    }
+   
 }
