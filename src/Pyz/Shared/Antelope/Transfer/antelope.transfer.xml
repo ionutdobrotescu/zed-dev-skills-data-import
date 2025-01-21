@@ -1,21 +1,56 @@
 <?xml version="1.0"?>
-<transfers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xmlns="spryker:transfer-01"
+<transfers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="spryker:transfer-01"
            xsi:schemaLocation="spryker:transfer-01 http://static.spryker.com/transfer-01.xsd">
 
     <transfer name="Antelope">
         <property name="idAntelope" type="int"/>
         <property name="name" type="string"/>
+        <property name="fkAntelopeLocation" type="int"/>
+        <property name="antelopeLocation" type="AntelopeLocation"/>
     </transfer>
-    <transfer name="AntelopeCriteria">
-        <property name="name" type="string"/>
+    <transfer name="AntelopeCollection">
+        <property name="antelopes" type="Antelope[]" singular="antelope"/>
+    </transfer>
+    <transfer name="AntelopeCollectionResponse">
+        <property name="antelopes" type="Antelope[]"/>
+        <property name="isSuccessful" type="bool"/>
+        <property name="errorMessage" type="string"/>
     </transfer>
     <transfer name="AntelopeResponse">
         <property name="antelope" type="Antelope"/>
-        <property name="isSuccessFul" type="bool"/>
+        <property name="isSuccessful" type="bool"/>
+        <property name="errorMessage" type="string"/>
+    </transfer>
+    <transfer name="AntelopeCollection">
+        <property name="antelopes" type="Antelope[]" singular="antelope"/>
+    </transfer>
+    <transfer name="AntelopeCriteria">
+        <property name="name" type="string"/>
+        <property name="idAntelope" type="int"/>
     </transfer>
     <transfer name="AntelopeLocation">
         <property name="idAntelopeLocation" type="int"/>
         <property name="locationName" type="string"/>
+    </transfer>
+
+    <transfer name="AntelopeLocationCriteria">
+        <property name="idAntelopeLocation" type="int"/>
+        <property name="locationName" type="string"/>
+    </transfer>
+
+    <transfer name="AntelopeLocationResponse">
+        <property name="antelopeLocation" type="AntelopeLocation"/>
+        <property name="isSuccessful" type="bool"/>
+        <property name="errorMessage" type="string"/>
+    </transfer>
+    <transfer name="AntelopeLocationCollectionResponse">
+        <property name="antelopeLocations" type="AntelopeLocation[]"/>
+        <property name="isSuccessful" type="bool"/>
+        <property name="errorMessage" type="string"/>
+    </transfer>
+
+
+    <transfer name="AntelopeLocationCollection">
+        <property name="antelopeLocations" type="AntelopeLocation[]" singular="antelopeLocation"/>
     </transfer>
 </transfers>
