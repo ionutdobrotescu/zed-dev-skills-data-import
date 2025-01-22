@@ -30,7 +30,7 @@ class AntelopeDataProvider
     private function getLocationChoices(): array
     {
         $antelopeLocationCollectionTransfer = $this->antelopeFacade->getAntelopeLocations();
-        $mappedLocationChoices = [];
+        $mappedLocationChoices = ['Select' => ''];
         foreach ($antelopeLocationCollectionTransfer->getAntelopeLocations() as $antelopeLocationTransfer) {
             $mappedLocationChoices[$antelopeLocationTransfer->getLocationName(
             )] = $antelopeLocationTransfer->getIdAntelopeLocation();
