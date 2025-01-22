@@ -15,10 +15,10 @@ use Propel\Runtime\Collection\Collection;
 class AntelopeMapper
 {
     /**
-     * @param AntelopeTransfer $antelopeTransfer
-     * @param PyzAntelope $entity
+     * @param \Generated\Shared\Transfer\AntelopeTransfer $antelopeTransfer
+     * @param \Orm\Zed\Antelope\Persistence\Base\PyzAntelope $entity
      *
-     * @return PyzAntelope
+     * @return \Orm\Zed\Antelope\Persistence\Base\PyzAntelope
      */
     public function mapAntelopeTransferToEntity(AntelopeTransfer $antelopeTransfer, PyzAntelope $entity): PyzAntelope
     {
@@ -26,11 +26,12 @@ class AntelopeMapper
     }
 
     /**
-     * @param Collection $entityCollection
-     * @return AntelopeCollectionTransfer
+     * @param \Propel\Runtime\Collection\Collection $entityCollection
+     *
+     * @return \Generated\Shared\Transfer\AntelopeCollectionTransfer
      */
     public function mapAntelopeEntityCollectionToAntelopeCollectionTransfer(
-        Collection $entityCollection
+        Collection $entityCollection,
     ): AntelopeCollectionTransfer {
         $antelopeCollectionTransfer = new AntelopeCollectionTransfer();
         foreach ($entityCollection as $entity) {
@@ -43,12 +44,13 @@ class AntelopeMapper
 
     /**
      * @param array $entity
-     * @param AntelopeTransfer $antelopeTransfer
-     * @return AntelopeTransfer
+     * @param \Generated\Shared\Transfer\AntelopeTransfer $antelopeTransfer
+     *
+     * @return \Generated\Shared\Transfer\AntelopeTransfer
      */
     public function mapEntityToAntelopeTransfer(
         PyzAntelope $entity,
-        AntelopeTransfer $antelopeTransfer
+        AntelopeTransfer $antelopeTransfer,
     ): AntelopeTransfer {
         return $antelopeTransfer->fromArray($entity->toArray(), true);
     }

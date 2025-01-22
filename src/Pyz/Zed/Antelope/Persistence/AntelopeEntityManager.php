@@ -16,7 +16,7 @@ use Orm\Zed\Antelope\Persistence\PyzAntelopeLocation;
 use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
 
 /**
- * @method AntelopePersistenceFactory getFactory()
+ * @method \Pyz\Zed\Antelope\Persistence\AntelopePersistenceFactory getFactory()
  */
 class AntelopeEntityManager extends AbstractEntityManager implements
     AntelopeEntityManagerInterface

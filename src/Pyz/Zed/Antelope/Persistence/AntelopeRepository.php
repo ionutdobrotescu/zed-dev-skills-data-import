@@ -18,7 +18,7 @@ use Pyz\Zed\Antelope\Persistence\Exception\EntityNotFoundException;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
 /**
- * @method AntelopePersistenceFactory getFactory()
+ * @method \Pyz\Zed\Antelope\Persistence\AntelopePersistenceFactory getFactory()
  */
 class AntelopeRepository extends AbstractRepository implements
     AntelopeRepositoryInterface
@@ -121,8 +121,8 @@ class AntelopeRepository extends AbstractRepository implements
         return $collectionTransfer;
     }
 
-    public function getAntelopeCollection(AntelopeCriteriaTransfer $antelopeCriteriaTransfer
-    ): AntelopeCollectionTransfer {
+    public function getAntelopeCollection(AntelopeCriteriaTransfer $antelopeCriteriaTransfer): AntelopeCollectionTransfer
+    {
         $query = $this->getFactory()->createAntelopeQuery();
 
         if ($antelopeCriteriaTransfer->getName() !== null) {
@@ -131,8 +131,9 @@ class AntelopeRepository extends AbstractRepository implements
 
         $antelopeEntities = $query->find();
         $antelopeMapper = $this->getFactory()->createAntelopeMapper();
+
         return $antelopeMapper->mapAntelopeEntityCollectionToAntelopeCollectionTransfer(
-            $antelopeEntities
+            $antelopeEntities,
         );
     }
 }
