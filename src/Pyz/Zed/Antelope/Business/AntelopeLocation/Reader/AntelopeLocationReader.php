@@ -14,6 +14,9 @@ use Generated\Shared\Transfer\AntelopeLocationTransfer;
 use Pyz\Zed\Antelope\Persistence\AntelopeRepository;
 use Pyz\Zed\Antelope\Persistence\Exception\EntityNotFoundException;
 
+/**
+ * @method \Pyz\Zed\Antelope\Persistence\AntelopeRepositoryInterface getRepository()
+ */
 class AntelopeLocationReader
 {
     public function __construct(
@@ -47,5 +50,10 @@ class AntelopeLocationReader
     public function getAntelopeLocationCollection(AntelopeLocationCriteriaTransfer $antelopeLocationCriteriaTransfer): AntelopeLocationCollectionTransfer
     {
         return $this->antelopeRepository->findAntelopeLocationCollection($antelopeLocationCriteriaTransfer);
+    }
+
+    public function getAntelopeLocations(): AntelopeLocationCollectionTransfer
+    {
+        return $this->antelopeRepository->getAntelopeLocationsCollection();
     }
 }

@@ -27,4 +27,6 @@ interface AntelopeRepositoryInterface
     ): AntelopeLocationCollectionTransfer;
 
     public function getAntelopeCollection(AntelopeCriteriaTransfer $antelopeCriteriaTransfer): AntelopeCollectionTransfer;
+
+    public function getAntelopeLocationsCollection(): AntelopeLocationCollectionTransfer;
 }

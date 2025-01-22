@@ -1,11 +1,15 @@
 <?php
 
+/**
+ * This file is part of the Spryker Commerce OS.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Pyz\Zed\AntelopeGui\Communication\Table;
 
 use Orm\Zed\Antelope\Persistence\Map\PyzAntelopeTableMap;
-use Orm\Zed\Antelope\Persistence\PyzAntelope;
 use Orm\Zed\Antelope\Persistence\PyzAntelopeQuery;
 use Propel\Runtime\Collection\ObjectCollection;
 use Spryker\Zed\Gui\Communication\Table\AbstractTable;
@@ -14,17 +18,17 @@ use Spryker\Zed\Gui\Communication\Table\TableConfiguration;
 class AntelopeTable extends AbstractTable
 {
     public const string COL_ID_ANTELOPE = PyzAntelopeTableMap::COL_ID_ANTELOPE;
-    public const string COL_NAME = PyzAntelopeTableMap::COL_NAME;
 
+    public const string COL_NAME = PyzAntelopeTableMap::COL_NAME;
 
     public function __construct(protected PyzAntelopeQuery $antelopeQuery)
     {
     }
 
     /**
-     * @param TableConfiguration $config
+     * @param \Spryker\Zed\Gui\Communication\Table\TableConfiguration $config
      *
-     * @return TableConfiguration
+     * @return \Spryker\Zed\Gui\Communication\Table\TableConfiguration
      */
     protected function configure(TableConfiguration $config): TableConfiguration
     {
@@ -49,7 +53,7 @@ class AntelopeTable extends AbstractTable
     }
 
     /**
-     * @param TableConfiguration $config
+     * @param \Spryker\Zed\Gui\Communication\Table\TableConfiguration $config
      *
      * @return array
      */
@@ -58,7 +62,7 @@ class AntelopeTable extends AbstractTable
         $antelopeEntityCollection = $this->runQuery(
             $this->antelopeQuery,
             $config,
-            true
+            true,
         );
 
         if (!$antelopeEntityCollection->count()) {
@@ -69,18 +73,18 @@ class AntelopeTable extends AbstractTable
     }
 
     /**
-     * @param ObjectCollection<PyzAntelope> $antelopeEntityCollection
+     * @param \Propel\Runtime\Collection\ObjectCollection<\Pyz\Zed\AntelopeGui\Communication\Table\PyzAntelope> $antelopeEntityCollection
      *
-     * @return array<int,mixed>
+     * @return array<int, mixed>
      */
-    protected function mapReturns(ObjectCollection $antelopeEntityCollection
-    ): array {
+    protected function mapReturns(ObjectCollection $antelopeEntityCollection): array
+    {
         $returns = [];
 
         foreach ($antelopeEntityCollection as $antelopeEntity) {
             $returns[] = [
                 static::COL_ID_ANTELOPE => $antelopeEntity->getIdAntelope(),
-                static::COL_NAME => $antelopeEntity->getName()
+                static::COL_NAME => $antelopeEntity->getName(),
             ];
         }
 

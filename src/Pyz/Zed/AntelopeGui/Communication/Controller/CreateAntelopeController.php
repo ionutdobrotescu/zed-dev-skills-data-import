@@ -1,11 +1,15 @@
 <?php
 
+/**
+ * This file is part of the Spryker Commerce OS.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Pyz\Zed\AntelopeGui\Communication\Controller;
 
 use Generated\Shared\Transfer\AntelopeTransfer;
-use Pyz\Zed\AntelopeGui\Communication\AntelopeGuiCommunicationFactory;
 use Spryker\Service\UtilText\Model\Url\Url;
 use Spryker\Zed\Kernel\Communication\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
@@ -13,7 +17,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @method AntelopeGuiCommunicationFactory getFactory()
+ * @method \Pyz\Zed\AntelopeGui\Communication\AntelopeGuiCommunicationFactory getFactory()
  */
 class CreateAntelopeController extends AbstractController
 {
@@ -22,8 +26,9 @@ class CreateAntelopeController extends AbstractController
     protected const string MESSAGE_ANTELOPE_CREATED_SUCCESS = 'Antelope was successfully created.';
 
     /**
-     * @param Request $request
-     * @return RedirectResponse|array<string,mixed>
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
      */
     public function indexAction(Request $request): RedirectResponse|array
     {
@@ -41,9 +46,9 @@ class CreateAntelopeController extends AbstractController
         ]);
     }
 
-    protected function createAntelope(FormInterface $antelopeCreateForm
-    ): RedirectResponse {
-        /** @var AntelopeTransfer|null $antelopeTransfer */
+    protected function createAntelope(FormInterface $antelopeCreateForm): RedirectResponse
+    {
+        /** @var \Generated\Shared\Transfer\AntelopeTransfer|null $antelopeTransfer */
         $antelopeTransfer = $antelopeCreateForm->getData();
 
         $this->getFactory()
