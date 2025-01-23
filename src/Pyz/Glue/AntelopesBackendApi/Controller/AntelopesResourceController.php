@@ -19,35 +19,40 @@ use Spryker\Glue\Kernel\Backend\Controller\AbstractController;
  */
 class AntelopesResourceController extends AbstractController
 {
-    public function getCollectionAction(GlueRequestTransfer $glueRequestTransfer
-    ): GlueResponseTransfer {
-        return $this->getFactory()->createAntelopesReader()->getAntelopeCollection($glueRequestTransfer);
+    public function getCollectionAction(GlueRequestTransfer $glueRequestTransfer): GlueResponseTransfer
+    {
+        return $this->getFactory()->createAntelopeReader()->getAntelopeCollection($glueRequestTransfer);
     }
 
-    public function getAction(GlueRequestTransfer $glueRequestTransfer
-    ): GlueResponseTransfer {
-        return $this->getFactory()->createAntelopesReader()->getAntelope($glueRequestTransfer);
+    public function getAction(GlueRequestTransfer $glueRequestTransfer): GlueResponseTransfer
+    {
+        return $this->getFactory()->createAntelopeReader()->getAntelope($glueRequestTransfer);
     }
 
     public function postAction(
         AntelopesBackendApiAttributesTransfer $antelopesBackendApiAttributesTransfer,
-        GlueRequestTransfer $glueRequestTransfer
+        GlueRequestTransfer $glueRequestTransfer,
     ): GlueResponseTransfer {
-        return $this->getFactory()->createAntelopeWriter()->createAntelope($antelopesBackendApiAttributesTransfer,
-            $glueRequestTransfer);
+        return $this->getFactory()->createAntelopeWriter()->createAntelope(
+            $antelopesBackendApiAttributesTransfer,
+            $glueRequestTransfer,
+        );
     }
 
     public function patchAction(
         AntelopesBackendApiAttributesTransfer $antelopesBackendApiAttributesTransfer,
-        GlueRequestTransfer $glueRequestTransfer
+        GlueRequestTransfer $glueRequestTransfer,
     ): GlueResponseTransfer {
         $antelopesBackendApiAttributesTransfer->setIdAntelope((int)$glueRequestTransfer->getResource()?->getId());
-        return $this->getFactory()->createAntelopeUpdater()->updateAntelope($antelopesBackendApiAttributesTransfer,
-            $glueRequestTransfer);
+
+        return $this->getFactory()->createAntelopeUpdater()->updateAntelope(
+            $antelopesBackendApiAttributesTransfer,
+            $glueRequestTransfer,
+        );
     }
 
-    public function deleteAction(GlueRequestTransfer $glueRequestTransfer
-    ): GlueResponseTransfer {
+    public function deleteAction(GlueRequestTransfer $glueRequestTransfer): GlueResponseTransfer
+    {
         return $this->getFactory()->createAntelopeDeleter()->deleteAntelope($glueRequestTransfer);
     }
 }

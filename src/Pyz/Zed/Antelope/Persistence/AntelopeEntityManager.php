@@ -43,4 +43,38 @@ class AntelopeEntityManager extends AbstractEntityManager implements
             true,
         );
     }
+
+    public function updateAntelope(AntelopeTransfer $antelopeTransfer): AntelopeTransfer
+    {
+        $antelopeEntity = $this->getFactory()->createAntelopeQuery()
+            ->filterByIdAntelope($antelopeTransfer->getIdAntelope())->findOne();
+        if (!$antelopeEntity) {
+            return $antelopeTransfer;
+        }
+        $mapper = $this->getFactory()->createAntelopeMapper();
+        $antelopeEntity = $mapper->mapAntelopeTransferToEntity(
+            $antelopeTransfer,
+            $antelopeEntity,
+        );
+        $antelopeEntity->save();
+
+        return $mapper->mapEntityToAntelopeTransfer(
+            $antelopeEntity,
+            $antelopeTransfer,
+        );
+    }
+
+    public function deleteAntelope(AntelopeTransfer $antelopeTransfer): int
+    {
+        return $this->getFactory()->createAntelopeQuery()->filterByPrimaryKey(
+            $antelopeTransfer->getIdAntelope(),
+        )->delete();
+    }
+
+    public function deleteAntelopeLocation(AntelopeLocationTransfer $antelopeLocationTransfer): int
+    {
+        return $this->getFactory()->createAntelopeLocationQuery()->filterByPrimaryKey(
+            $antelopeLocationTransfer->getIdAntelopeLocation(),
+        )->delete();
+    }
 }

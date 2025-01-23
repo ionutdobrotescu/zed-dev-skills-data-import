@@ -13,7 +13,7 @@ use Generated\Shared\Transfer\AntelopeConditionTransfer;
 use Generated\Shared\Transfer\GlueRequestTransfer;
 use Pyz\Glue\AntelopesBackendApi\AntelopesBackendApiConfig;
 
-class AntelopesExpander implements AntelopesExpanderInterface
+class AntelopeExpander implements AntelopeExpanderInterface
 {
     public function expandWithFilters(
         AntelopeConditionTransfer $antelopeConditionTransfer,
@@ -42,18 +42,6 @@ class AntelopesExpander implements AntelopesExpanderInterface
                     $antelopeConditionTransfer->setAntelopeIds($ids);
 
                     break;
-                case AntelopeConditionTransfer::COLOR:
-                    $antelopeConditionTransfer->setColor($filterValue);
-
-                    break;
-                case AntelopeConditionTransfer::LOCATION_ID:
-                    $antelopeConditionTransfer->setLocationId((int)$filterValue);
-
-                    break;
-                case AntelopeConditionTransfer::TYPE_ID:
-                    $antelopeConditionTransfer->setTypeId((int)$filterValue);
-
-                    break;
             }
         }
 
@@ -75,7 +63,7 @@ class AntelopesExpander implements AntelopesExpanderInterface
             'intval',
             array_filter(
                 $filterValue,
-                static fn (string $item) => is_numeric(trim($item))
+                static fn (string $item) => is_numeric(trim($item)),
             ),
         );
     }

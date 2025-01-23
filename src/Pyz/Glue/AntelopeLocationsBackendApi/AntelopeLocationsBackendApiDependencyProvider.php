@@ -5,12 +5,12 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace Pyz\Glue\AntelopesBackendApi;
+namespace Pyz\Glue\AntelopeLocationsBackendApi;
 
 use Spryker\Glue\Kernel\Backend\AbstractBundleDependencyProvider;
 use Spryker\Glue\Kernel\Backend\Container;
 
-class AntelopesBackendApiDependencyProvider extends AbstractBundleDependencyProvider
+class AntelopeLocationsBackendApiDependencyProvider extends AbstractBundleDependencyProvider
 {
     /**
      * @var string

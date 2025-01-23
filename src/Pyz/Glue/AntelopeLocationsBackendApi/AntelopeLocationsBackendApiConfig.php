@@ -7,14 +7,14 @@
 
 declare(strict_types=1);
 
-namespace Pyz\Glue\AntelopesBackendApi;
+namespace Pyz\Glue\AntelopeLocationsBackendApi;
 
 use Spryker\Glue\Kernel\AbstractBundleConfig;
 
-class AntelopesBackendApiConfig extends AbstractBundleConfig
+class AntelopeLocationsBackendApiConfig extends AbstractBundleConfig
 {
     /**
      * @var string
      */
-    public const string RESOURCE_ANTELOPES = 'antelopes';
+    public const string RESOURCE_ANTELOPE_LOCATIONS = 'antelope-locations';
 }

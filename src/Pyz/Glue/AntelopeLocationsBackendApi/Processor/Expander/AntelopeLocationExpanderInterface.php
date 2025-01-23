@@ -5,15 +5,15 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace Pyz\Glue\AntelopesBackendApi\Processor\Expander;
+namespace Pyz\Glue\AntelopeLocationsBackendApi\Processor\Expander;
 
-use Generated\Shared\Transfer\AntelopeConditionTransfer;
+use Generated\Shared\Transfer\AntelopeLocationConditionTransfer;
 use Generated\Shared\Transfer\GlueRequestTransfer;
 
-interface AntelopesExpanderInterface
+interface AntelopeLocationExpanderInterface
 {
     public function expandWithFilters(
-        AntelopeConditionTransfer $antelopeConditionTransfer,
+        AntelopeLocationConditionTransfer $antelopeLocationConditionTransfer,
         GlueRequestTransfer $glueRequestTransfer,
-    ): AntelopeConditionTransfer;
+    ): AntelopeLocationConditionTransfer;
 }

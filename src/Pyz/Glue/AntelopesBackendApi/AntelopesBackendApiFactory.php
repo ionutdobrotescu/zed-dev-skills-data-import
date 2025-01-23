@@ -8,28 +8,32 @@
 namespace Pyz\Glue\AntelopesBackendApi;
 
 use Pyz\Glue\AntelopesBackendApi\Processor\Creator\AntelopeCreator;
+use Pyz\Glue\AntelopesBackendApi\Processor\Creator\AntelopeCreatorInterface;
 use Pyz\Glue\AntelopesBackendApi\Processor\Deleter\AntelopeDeleter;
-use Pyz\Glue\AntelopesBackendApi\Processor\Expander\AntelopesExpander;
-use Pyz\Glue\AntelopesBackendApi\Processor\Expander\AntelopesExpanderInterface;
+use Pyz\Glue\AntelopesBackendApi\Processor\Deleter\AntelopeDeleterInterface;
+use Pyz\Glue\AntelopesBackendApi\Processor\Expander\AntelopeExpander;
+use Pyz\Glue\AntelopesBackendApi\Processor\Expander\AntelopeExpanderInterface;
 use Pyz\Glue\AntelopesBackendApi\Processor\Mapper\AntelopeMapper;
 use Pyz\Glue\AntelopesBackendApi\Processor\Mapper\AntelopeMapperInterface;
 use Pyz\Glue\AntelopesBackendApi\Processor\Reader\AntelopeReader;
 use Pyz\Glue\AntelopesBackendApi\Processor\Reader\AntelopeReaderInterface;
 use Pyz\Glue\AntelopesBackendApi\Processor\ResponseBuilder\AntelopeResponseBuilder;
 use Pyz\Glue\AntelopesBackendApi\Processor\ResponseBuilder\AntelopeResponseBuilderInterface;
-use Pyz\Glue\AntelopesBackendApi\Updater\AntelopeUpdater;
-use Pyz\Glue\AntelopesBackendApi\Updater\AntelopeUpdaterInterface;
+use Pyz\Glue\AntelopesBackendApi\Processor\ResponseBuilder\ErrorResponseBuilder;
+use Pyz\Glue\AntelopesBackendApi\Processor\ResponseBuilder\ErrorResponseBuilderInterface;
+use Pyz\Glue\AntelopesBackendApi\Processor\Updater\AntelopeUpdater;
+use Pyz\Glue\AntelopesBackendApi\Processor\Updater\AntelopeUpdaterInterface;
 use Pyz\Zed\Antelope\Business\AntelopeFacadeInterface;
 use Spryker\Glue\Kernel\Backend\AbstractFactory;
 
 class AntelopesBackendApiFactory extends AbstractFactory
 {
-    public function createAntelopesReader(): AntelopeReaderInterface
+    public function createAntelopeReader(): AntelopeReaderInterface
     {
         return new AntelopeReader(
             $this->getAntelopeFacade(),
             $this->createAntelopeResponseBuilder(),
-            $this->createAntelopesExpander(),
+            $this->createAntelopeExpander(),
         );
     }
 
@@ -38,22 +42,23 @@ class AntelopesBackendApiFactory extends AbstractFactory
         return $this->getProvidedDependency(AntelopesBackendApiDependencyProvider::FACADE_ANTELOPE);
     }
 
-    public function createAntelopeResponseBuilder(
-    ): AntelopeResponseBuilderInterface
+    public function createAntelopeResponseBuilder(): AntelopeResponseBuilderInterface
     {
         return new AntelopeResponseBuilder();
     }
 
-    public function createAntelopesExpander(): AntelopesExpanderInterface
+    public function createAntelopeExpander(): AntelopeExpanderInterface
     {
-        return new AntelopesExpander();
+        return new AntelopeExpander();
     }
 
-    public function createAntelopeWriter(): AntelopeCreator
+    public function createAntelopeWriter(): AntelopeCreatorInterface
     {
-        return new AntelopeCreator($this->getAntelopeFacade(),
+        return new AntelopeCreator(
+            $this->getAntelopeFacade(),
             $this->createAntelopeResponseBuilder(),
-            $this->createAntelopeMapper()
+            $this->createAntelopeMapper(),
+            $this->createAntelopeErrorResponse(),
         );
     }
 
@@ -62,17 +67,28 @@ class AntelopesBackendApiFactory extends AbstractFactory
         return new AntelopeMapper();
     }
 
-    public function createAntelopeUpdater(): AntelopeUpdaterInterface
+    private function createAntelopeErrorResponse(): ErrorResponseBuilderInterface
     {
-        return new AntelopeUpdater($this->getAntelopeFacade(),
-            $this->createAntelopeResponseBuilder(),
-            $this->createAntelopeMapper());
+        return new ErrorResponseBuilder();
     }
 
-    public function createAntelopeDeleter()
+    public function createAntelopeUpdater(): AntelopeUpdaterInterface
     {
-        return new AntelopeDeleter($this->getAntelopeFacade(),
+        return new AntelopeUpdater(
+            $this->getAntelopeFacade(),
             $this->createAntelopeResponseBuilder(),
-            $this->createAntelopeMapper());
+            $this->createAntelopeMapper(),
+            $this->createAntelopeErrorResponse(),
+        );
+    }
+
+    public function createAntelopeDeleter(): AntelopeDeleterInterface
+    {
+        return new AntelopeDeleter(
+            $this->getAntelopeFacade(),
+            $this->createAntelopeResponseBuilder(),
+            $this->createAntelopeMapper(),
+            $this->createAntelopeErrorResponse(),
+        );
     }
 }

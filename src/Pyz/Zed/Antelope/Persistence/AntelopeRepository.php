@@ -100,9 +100,9 @@ class AntelopeRepository extends AbstractRepository implements
     }
 
     public function findAntelopeLocationCollection(
-        AntelopeLocationCriteriaTransfer $criteriaTransfer,
+        AntelopeLocationCriteriaTransfer $antelopeLocationCriteriaTransfer,
     ): AntelopeLocationCollectionTransfer {
-        return $this->getAntelopeLocations($criteriaTransfer);
+        return $this->getAntelopeLocations($antelopeLocationCriteriaTransfer);
     }
 
     /**
@@ -110,15 +110,16 @@ class AntelopeRepository extends AbstractRepository implements
      *
      * @return \Generated\Shared\Transfer\AntelopeLocationCollectionTransfer
      */
-    public function getAntelopeLocations(AntelopeLocationCriteriaTransfer $criteriaTransfer): AntelopeLocationCollectionTransfer
+    public function getAntelopeLocations(AntelopeLocationCriteriaTransfer $antelopeLocationCriteriaTransfer): AntelopeLocationCollectionTransfer
     {
         $query = $this->getFactory()->createAntelopeLocationQuery();
-
-        if ($criteriaTransfer->getLocationName() !== null) {
-            $query->filterByLocationName($criteriaTransfer->getLocationName());
+        $name = $antelopeLocationCriteriaTransfer->getAntelopeLocationsConditions()->getName();
+        if ($name) {
+            $query->filterByLocationName($name);
         }
-        if ($criteriaTransfer->getIdAntelopeLocation() !== null) {
-            $query->filterByLocationName($criteriaTransfer->getIdAntelopeLocation());
+        $idLocation = $antelopeLocationCriteriaTransfer->getAntelopeLocationsConditions()->getIdAntelopeLocation();
+        if ($idLocation) {
+            $query->filterByIdAntelopeLocation($idLocation);
         }
 
         $antelopeLocations = $query->find();

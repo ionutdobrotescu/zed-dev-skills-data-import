@@ -5,16 +5,16 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace Pyz\Glue\AntelopesBackendApi\Processor\Creator;
+namespace Pyz\Glue\AntelopeLocationsBackendApi\Processor\Creator;
 
-use Generated\Shared\Transfer\AntelopesBackendApiAttributesTransfer;
+use Generated\Shared\Transfer\AntelopeLocationsBackendApiAttributesTransfer;
 use Generated\Shared\Transfer\GlueRequestTransfer;
 use Generated\Shared\Transfer\GlueResponseTransfer;
 
-interface AntelopeCreatorInterface
+interface AntelopeLocationCreatorInterface
 {
-    public function createAntelope(
-        AntelopesBackendApiAttributesTransfer $antelopesBackendApiAttributesTransfer,
+    public function createAntelopeLocation(
+        AntelopeLocationsBackendApiAttributesTransfer $antelopeLocationsBackendApiAttributesTransfer,
         GlueRequestTransfer $glueRequestTransfer,
     ): GlueResponseTransfer;
 }
