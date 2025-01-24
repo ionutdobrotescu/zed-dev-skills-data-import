@@ -46,7 +46,6 @@ class AntelopeLocationsResourceController extends AbstractController
         $antelopeLocationsBackendApiAttributesTransfer->setIdAntelopeLocation(
             (int)$glueRequestTransfer->getResource()?->getId(),
         );
-
         return $this->getFactory()->createAntelopeLocationUpdater()->updateAntelopeLocation(
             $antelopeLocationsBackendApiAttributesTransfer,
             $glueRequestTransfer,

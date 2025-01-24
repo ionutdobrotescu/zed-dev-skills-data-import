@@ -33,6 +33,7 @@ class AntelopeLocationsBackendApiFactory extends AbstractFactory
             $this->getAntelopeFacade(),
             $this->createAntelopeLocationResponseBuilder(),
             $this->createAntelopeLocationExpander(),
+            $this->createErrorResponseBuilder(),
         );
     }
 
@@ -49,6 +50,11 @@ class AntelopeLocationsBackendApiFactory extends AbstractFactory
     public function createAntelopeLocationExpander(): AntelopeLocationExpanderInterface
     {
         return new AntelopeLocationExpander();
+    }
+
+    private function createErrorResponseBuilder(): ErrorResponseBuilderInterface
+    {
+        return new ErrorResponseBuilder();
     }
 
     public function createAntelopeLocationWriter(): AntelopeLocationCreatorInterface
@@ -69,8 +75,8 @@ class AntelopeLocationsBackendApiFactory extends AbstractFactory
     {
         return new AntelopeLocationUpdater(
             $this->getAntelopeFacade(),
-            $this->createAntelopeResponseBuilder(),
-            $this->createAntelopeMapper(),
+            $this->createAntelopeLocationResponseBuilder(),
+            $this->createAntelopeLocationMapper(),
         );
     }
 
@@ -81,10 +87,5 @@ class AntelopeLocationsBackendApiFactory extends AbstractFactory
             $this->createAntelopeLocationResponseBuilder(),
             $this->createErrorResponseBuilder(),
         );
-    }
-
-    private function createErrorResponseBuilder(): ErrorResponseBuilderInterface
-    {
-        return new ErrorResponseBuilder();
     }
 }

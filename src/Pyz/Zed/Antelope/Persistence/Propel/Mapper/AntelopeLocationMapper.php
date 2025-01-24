@@ -17,7 +17,7 @@ class AntelopeLocationMapper
         AntelopeLocationTransfer $transfer,
         PyzAntelopeLocation $entity,
     ): PyzAntelopeLocation {
-        $entity->fromArray($transfer->modifiedToArray());
+        $entity->fromArray($transfer->toArray());
 
         return $entity;
     }

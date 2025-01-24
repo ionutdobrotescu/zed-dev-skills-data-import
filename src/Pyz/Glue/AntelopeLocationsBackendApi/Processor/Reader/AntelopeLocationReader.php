@@ -7,13 +7,17 @@
 
 namespace Pyz\Glue\AntelopeLocationsBackendApi\Processor\Reader;
 
+use ArrayObject;
 use Generated\Shared\Transfer\AntelopeLocationConditionTransfer;
 use Generated\Shared\Transfer\AntelopeLocationCriteriaTransfer;
+use Generated\Shared\Transfer\ErrorTransfer;
 use Generated\Shared\Transfer\GlueRequestTransfer;
 use Generated\Shared\Transfer\GlueResponseTransfer;
 use Pyz\Glue\AntelopeLocationsBackendApi\Processor\Expander\AntelopeLocationExpanderInterface;
 use Pyz\Glue\AntelopeLocationsBackendApi\Processor\ResponseBuilder\AntelopeLocationResponseBuilderInterface;
+use Pyz\Glue\AntelopeLocationsBackendApi\Processor\ResponseBuilder\ErrorResponseBuilderInterface;
 use Pyz\Zed\Antelope\Business\AntelopeFacadeInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 class AntelopeLocationReader implements AntelopeLocationReaderInterface
 {
@@ -21,6 +25,8 @@ class AntelopeLocationReader implements AntelopeLocationReaderInterface
         private readonly AntelopeFacadeInterface $antelopeFacade,
         private readonly AntelopeLocationResponseBuilderInterface $antelopeLocationResponseBuilder,
         private readonly AntelopeLocationExpanderInterface $antelopeLocationExpander,
+        private readonly ErrorResponseBuilderInterface $errorResponseBuilder,
+
     ) {
     }
 
@@ -38,14 +44,16 @@ class AntelopeLocationReader implements AntelopeLocationReaderInterface
     /**
      * @param \Generated\Shared\Transfer\AntelopeLocationCriteriaTransfer $antelopeCriteriaTransfer
      *
-     * @return \Generated\Shared\Transfer\GlueResponseTransfer
+     * @return GlueResponseTransfer
      */
     public function getAntelopeLocationCollectionTransfer(
         AntelopeLocationCriteriaTransfer $antelopeLocationCriteriaTransfer,
     ): GlueResponseTransfer {
         $antelopeLocationCollectionTransfer = $this->antelopeFacade
             ->getAntelopeLocationCollection($antelopeLocationCriteriaTransfer);
-
+        if (!$antelopeLocationCollectionTransfer->getAntelopeLocations()->count()) {
+            return $this->respondWithErrors();
+        }
         return $this->antelopeLocationResponseBuilder->createAntelopeLocationResponse(
             $antelopeLocationCollectionTransfer,
         );
@@ -65,5 +73,22 @@ class AntelopeLocationReader implements AntelopeLocationReaderInterface
             ->setAntelopeLocationsConditions($conditions);
 
         return $this->getAntelopeLocationCollectionTransfer($antelopeLocationCriteriaTransfer);
+    }
+
+    /**
+     * @return GlueResponseTransfer
+     */
+    public function respondWithErrors(): GlueResponseTransfer
+    {
+        $errorTransfer = new ErrorTransfer();
+        $errorTransfer->setMessage('Antelope location not found');
+        $errorTransfer->setParameters(
+            ['status' => Response::HTTP_NOT_FOUND, 'message' => 'Antelope location not found'],
+        );
+        $errorTransfers = new ArrayObject();
+        $errorTransfers->append($errorTransfer);
+        return $this->errorResponseBuilder->createErrorResponse(
+            $errorTransfers,
+        );
     }
 }

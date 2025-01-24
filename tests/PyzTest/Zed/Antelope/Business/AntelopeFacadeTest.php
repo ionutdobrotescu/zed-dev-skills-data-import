@@ -13,7 +13,7 @@ use Pyz\Zed\Antelope\Business\AntelopeBusinessFactory;
 use Pyz\Zed\Antelope\Business\AntelopeFacade;
 use Pyz\Zed\Antelope\Business\AntelopeFacadeInterface;
 use Pyz\Zed\Antelope\Business\AntelopeLocation\Reader\AntelopeLocationReader;
-use Pyz\Zed\Antelope\Business\AntelopeLocation\Writer\AntelopeLocationWriter;
+use Pyz\Zed\Antelope\Business\AntelopeLocation\Writer\AntelopeLocationUpdater;
 
 /**
  * @group PyzTest
@@ -104,7 +104,7 @@ class AntelopeFacadeTest extends Unit
         // Arrange
         $antelopeLocationTransfer = new AntelopeLocationTransfer();
         $expectedAntelopeLocationTransfer = (new AntelopeLocationTransfer())->setLocationName('Location Name');
-        $antelopeLocationWriterMock = $this->createMock(AntelopeLocationWriter::class);
+        $antelopeLocationWriterMock = $this->createMock(AntelopeLocationUpdater::class);
 
         $this->businessFactoryMock->expects($this->once())
             ->method('createAntelopeLocationWriter')

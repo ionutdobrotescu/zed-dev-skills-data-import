@@ -7,8 +7,9 @@
 
 namespace Pyz\Glue\AntelopeLocationsBackendApi\Processor\Updater;
 
-use Generated\Shared\Transfer\AntelopeCollectionTransfer;
+use Generated\Shared\Transfer\AntelopeLocationCollectionTransfer;
 use Generated\Shared\Transfer\AntelopeLocationsBackendApiAttributesTransfer;
+use Generated\Shared\Transfer\AntelopeLocationTransfer;
 use Generated\Shared\Transfer\GlueRequestTransfer;
 use Generated\Shared\Transfer\GlueResponseTransfer;
 use Pyz\Glue\AntelopeLocationsBackendApi\Processor\Mapper\AntelopeLocationMapperInterface;
@@ -28,13 +29,17 @@ class AntelopeLocationUpdater implements AntelopeUpdaterInterface
         AntelopeLocationsBackendApiAttributesTransfer $antelopeLocationsBackendApiAttributesTransfer,
         GlueRequestTransfer $glueRequestTransfer,
     ): GlueResponseTransfer {
-        $antelopeTransfer = $this->antelopeLocationMapper->mapAntelopeLocationsBackendApiAttributesToAntelopeLocationTransfer(
+        $antelopeLocationTransfer = $this->antelopeLocationMapper->mapAntelopeLocationsBackendApiAttributesToAntelopeLocationTransfer(
             $antelopeLocationsBackendApiAttributesTransfer,
             new AntelopeLocationTransfer(),
         );
-        $antelopeTransfer = $this->antelopeFacade->updateAntelope($antelopeTransfer);
-        $antelopeCollectionTransfer = (new AntelopeCollectionTransfer())->addAntelope($antelopeTransfer);
+        $antelopeLocationTransfer = $this->antelopeFacade->updateAntelopeLocation($antelopeLocationTransfer);
+        $antelopeLocationCollectionTransfer = (new AntelopeLocationCollectionTransfer())->addAntelopeLocation(
+            $antelopeLocationTransfer
+        );
 
-        return $this->antelopeResponseBuilder->createAntelopeResponse($antelopeCollectionTransfer);
+        return $this->antelopeLocationResponseBuilder->createAntelopeLocationResponse(
+            $antelopeLocationCollectionTransfer
+        );
     }
 }

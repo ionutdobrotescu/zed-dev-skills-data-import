@@ -25,4 +25,7 @@ interface AntelopeEntityManagerInterface
     public function deleteAntelope(AntelopeTransfer $antelopeTransfer): int;
 
     public function deleteAntelopeLocation(AntelopeLocationTransfer $antelopeTransfer): int;
+
+    public function updateAntelopeLocation(AntelopeLocationTransfer $antelopeLocationTransfer
+    ): AntelopeLocationTransfer;
 }
