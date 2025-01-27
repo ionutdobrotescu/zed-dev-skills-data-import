@@ -1,0 +1,35 @@
+{% extends model('component') %}
+{% define config = {
+    name: 'social-media',
+    tag: 'social-media',
+} %}
+
+{% block body %}
+    <h3>Social media</h3>
+    <div class="{{ config.name }}__container">
+        <!-- Facebook -->
+        <a class="btn btn-primary" style="background-color: #3b5998;" href="#!" role="button"
+        ><i class="bi bi-facebook-f"></i
+            ></a>
+
+        <!-- Twitter -->
+        <a class="btn btn-primary" style="background-color: #55acee;" href="#!" role="button"
+        ><i class="bi bi-twitter"></i
+            ></a>
+        <!-- Instagram -->
+        <a class="btn btn-primary" style="background-color: #ac2bac;" href="#!" role="button"
+        ><i class="bi bi-instagram"></i
+            ></a>
+
+        <!-- Linkedin -->
+        <a class="btn btn-primary" style="background-color: #0082ca;" href="#!" role="button"
+        ><i class="bi bi-linkedin"></i
+            ></a>
+
+        <!-- Pinterest -->
+        <a class="btn btn-primary" style="background-color: #c61118;" href="#!" role="button"
+        ><i class="bi bi-pinterest"></i
+            ></a>
+
+    </div>
+{% endblock %}
