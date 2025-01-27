@@ -19,17 +19,17 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
  * @method \Pyz\Zed\AntelopeDataImport\Business\AntelopeDataImportFacadeInterface getFacade()
  * @method \Pyz\Zed\AntelopeDataImport\AntelopeDataImportConfig getConfig()
  */
-class AntelopeDataImportPlugin extends AbstractPlugin implements
+class AntelopeLocationDataImportPlugin extends AbstractPlugin implements
     DataImportPluginInterface
 {
     public function import(
         ?DataImporterConfigurationTransfer $dataImporterConfigurationTransfer = null,
     ): DataImporterReportTransfer {
-        return $this->getFacade()->importAntelope($dataImporterConfigurationTransfer);
+        return $this->getFacade()->importAntelopeLocation($dataImporterConfigurationTransfer);
     }
 
     public function getImportType(): string
     {
-        return AntelopeDataImportConfig::IMPORT_TYPE_ANTELOPE;
+        return AntelopeDataImportConfig::IMPORT_TYPE_ANTELOPE_LOCATION;
     }
 }

@@ -8,6 +8,7 @@
 namespace Pyz\Zed\DataImport;
 
 use Pyz\Zed\AntelopeDataImport\Communication\Plugin\DataImport\AntelopeDataImportPlugin;
+use Pyz\Zed\AntelopeDataImport\Communication\Plugin\DataImport\AntelopeLocationDataImportPlugin;
 use Spryker\Zed\CategoryDataImport\Communication\Plugin\CategoryDataImportPlugin;
 use Spryker\Zed\CategoryDataImport\Communication\Plugin\DataImport\CategoryStoreDataImportPlugin;
 use Spryker\Zed\CmsPageDataImport\Communication\Plugin\CmsPageDataImportPlugin;
@@ -133,10 +134,12 @@ class DataImportDependencyProvider extends SprykerDataImportDependencyProvider
      */
     protected function addAvailabilityFacade(Container $container): Container
     {
-        $container->set(static::FACADE_AVAILABILITY,
+        $container->set(
+            static::FACADE_AVAILABILITY,
             function (Container $container) {
                 return $container->getLocator()->availability()->facade();
-            });
+            }
+        );
 
         return $container;
     }
@@ -148,10 +151,12 @@ class DataImportDependencyProvider extends SprykerDataImportDependencyProvider
      */
     protected function addCategoryFacade(Container $container): Container
     {
-        $container->set(static::FACADE_CATEGORY,
+        $container->set(
+            static::FACADE_CATEGORY,
             function (Container $container) {
                 return $container->getLocator()->category()->facade();
-            });
+            }
+        );
 
         return $container;
     }
@@ -163,10 +168,12 @@ class DataImportDependencyProvider extends SprykerDataImportDependencyProvider
      */
     protected function addProductBundleFacade(Container $container): Container
     {
-        $container->set(static::FACADE_PRODUCT_BUNDLE,
+        $container->set(
+            static::FACADE_PRODUCT_BUNDLE,
             function (Container $container) {
                 return $container->getLocator()->productBundle()->facade();
-            });
+            }
+        );
 
         return $container;
     }
@@ -178,10 +185,12 @@ class DataImportDependencyProvider extends SprykerDataImportDependencyProvider
      */
     protected function addProductRelationFacade(Container $container): Container
     {
-        $container->set(static::FACADE_PRODUCT_RELATION,
+        $container->set(
+            static::FACADE_PRODUCT_RELATION,
             function (Container $container) {
                 return $container->getLocator()->productRelation()->facade();
-            });
+            }
+        );
 
         return $container;
     }
@@ -193,10 +202,12 @@ class DataImportDependencyProvider extends SprykerDataImportDependencyProvider
      */
     protected function addProductSearchFacade(Container $container): Container
     {
-        $container->set(static::FACADE_PRODUCT_SEARCH,
+        $container->set(
+            static::FACADE_PRODUCT_SEARCH,
             function (Container $container) {
                 return $container->getLocator()->productSearch()->facade();
-            });
+            }
+        );
 
         return $container;
     }
@@ -208,10 +219,12 @@ class DataImportDependencyProvider extends SprykerDataImportDependencyProvider
      */
     protected function addCurrencyFacade(Container $container): Container
     {
-        $container->set(static::FACADE_CURRENCY,
+        $container->set(
+            static::FACADE_CURRENCY,
             function (Container $container) {
                 return $container->getLocator()->currency()->facade();
-            });
+            }
+        );
 
         return $container;
     }
@@ -223,10 +236,12 @@ class DataImportDependencyProvider extends SprykerDataImportDependencyProvider
      */
     protected function addPriceProductFacade(Container $container): Container
     {
-        $container->set(static::FACADE_PRICE_PRODUCT,
+        $container->set(
+            static::FACADE_PRICE_PRODUCT,
             function (Container $container) {
                 return $container->getLocator()->priceProduct()->facade();
-            });
+            }
+        );
 
         return $container;
     }
@@ -309,6 +324,7 @@ class DataImportDependencyProvider extends SprykerDataImportDependencyProvider
             new StockAddressDataImportPlugin(),
             new CategoryStoreDataImportPlugin(),
             new ProductConfigurationDataImportPlugin(),
+            new AntelopeLocationDataImportPlugin(),
             new AntelopeDataImportPlugin(),
         ];
     }
