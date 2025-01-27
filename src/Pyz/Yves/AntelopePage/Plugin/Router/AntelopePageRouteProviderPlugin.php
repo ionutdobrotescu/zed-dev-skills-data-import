@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * This file is part of the Spryker Commerce OS.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 namespace Pyz\Yves\AntelopePage\Plugin\Router;
 
 use Spryker\Yves\Router\Plugin\RouteProvider\AbstractRouteProviderPlugin;
@@ -11,20 +16,57 @@ class AntelopePageRouteProviderPlugin extends AbstractRouteProviderPlugin
 
     public function addRoutes(RouteCollection $routeCollection): RouteCollection
     {
-        $routeCollection = $this->addAntelopeAntelopeGetRoute($routeCollection);
+        $this->addAntelopeAntelopeGetRoute($routeCollection);
+        $this->addGetAntelopesRoute($routeCollection);
 
         return $routeCollection;
     }
 
+    /**
+     * @return void
+     */
     private function addAntelopeAntelopeGetRoute(
-        RouteCollection $routeCollection
-    ): RouteCollection {
-        $route = $this->buildRoute('/antelope/{name}', 'AntelopePage',
-            'Antelope', 'getAction');
-        $route = $route->setMethods(['GET']);
-        $routeCollection->add(static::ROUTE_NAME_ANTELOPE_NAME,
-            $route);
+        RouteCollection $routeCollection,
+    ): void {
+        $this->addGetAntelopeRoute($routeCollection);
+    }
 
-        return $routeCollection;
+    /**
+     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
+     *
+     * @return void
+     */
+    public function addGetAntelopeRoute(RouteCollection $routeCollection): void
+    {
+        $route = $this->buildRoute(
+            '/antelope/{name}',
+            'AntelopePage',
+            'Antelope',
+            'getAction',
+        );
+        $route = $route->setMethods(['GET']);
+        $routeCollection->add(
+            static::ROUTE_NAME_ANTELOPE_NAME,
+            $route,
+        );
+    }
+
+    /**
+     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
+     *
+     * @return void
+     */
+    public function addGetAntelopesRoute(RouteCollection $routeCollection): void
+    {
+        $route = $this->buildRoute(
+            '/antelopes',
+            'AntelopePage',
+            'Antelope',
+        );
+        $route = $route->setMethods(['GET']);
+        $routeCollection->add(
+            static::ROUTE_NAME_ANTELOPE_NAME,
+            $route,
+        );
     }
 }

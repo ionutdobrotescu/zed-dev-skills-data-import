@@ -8,25 +8,32 @@
 namespace Pyz\Zed\Antelope\Communication\Controller;
 
 use Faker\Factory as FakerFactory;
+use Generated\Shared\Transfer\AntelopeCollectionTransfer;
 use Generated\Shared\Transfer\AntelopeCriteriaTransfer;
 use Generated\Shared\Transfer\AntelopeLocationCriteriaTransfer;
 use Generated\Shared\Transfer\AntelopeLocationResponseTransfer;
 use Generated\Shared\Transfer\AntelopeLocationTransfer;
 use Generated\Shared\Transfer\AntelopeResponseTransfer;
 use Generated\Shared\Transfer\AntelopeTransfer;
-use Spryker\Zed\Kernel\Communication\Controller\AbstractController;
+use Spryker\Zed\Kernel\Communication\Controller\AbstractGatewayController;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @method \Pyz\Zed\Antelope\Business\AntelopeFacadeInterface getFacade()
  * @method \Pyz\Zed\Antelope\Persistence\AntelopeRepositoryInterface getRepository()
  */
-class GatewayController extends AbstractController
+class GatewayController extends AbstractGatewayController
 {
     public function getAntelopeAction(AntelopeCriteriaTransfer $antelopeCriteria): AntelopeResponseTransfer
     {
         return $this->getFacade()
             ->getAntelope($antelopeCriteria);
+    }
+
+    public function getAntelopeCollectionAction(AntelopeCriteriaTransfer $antelopeCriteria): AntelopeCollectionTransfer
+    {
+        return $this->getFacade()
+            ->getAntelopeCollection($antelopeCriteria);
     }
 
     public function getAntelopeLocationAction(Request $request): AntelopeLocationResponseTransfer

@@ -90,6 +90,7 @@ class AntelopeEntityManager extends AbstractEntityManager implements
             $pyzAntelopeLocationEntity,
         );
         $pyzAntelopeLocationEntity->save();
+
         return $this->getFactory()->createAntelopeLocationMapper()->mapAntelopeLocationEntityToTransfer(
             $pyzAntelopeLocationEntity,
             $antelopeLocationTransfer,

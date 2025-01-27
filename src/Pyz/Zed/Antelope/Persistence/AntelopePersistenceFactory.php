@@ -23,7 +23,7 @@ class AntelopePersistenceFactory extends AbstractPersistenceFactory
 {
     public function createAntelopeQuery(): PyzAntelopeQuery
     {
-        return PyzAntelopeQuery::create();
+        return PyzAntelopeQuery::create()->leftJoinPyzAntelopeLocation();
     }
 
     public function createAntelopeLocationQuery(): PyzAntelopeLocationQuery

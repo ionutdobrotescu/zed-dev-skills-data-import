@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * This file is part of the Spryker Commerce OS.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 namespace Pyz\Yves\AntelopePage;
 
 use Spryker\Yves\Kernel\AbstractBundleDependencyProvider;
@@ -19,10 +24,13 @@ class AntelopePageDependencyProvider extends AbstractBundleDependencyProvider
 
     protected function addAntelopeClient(Container $container): Container
     {
-        $container->set(static::CLIENT_ANTELOPE,
+        $container->set(
+            static::CLIENT_ANTELOPE,
             function (Container $container) {
                 return $container->getLocator()->antelope()->client();
-            });
+            },
+        );
+
         return $container;
     }
 }
