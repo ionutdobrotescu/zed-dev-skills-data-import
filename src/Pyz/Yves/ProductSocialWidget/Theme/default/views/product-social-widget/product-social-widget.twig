@@ -1,0 +1,5 @@
+{% extends template('widget') %}
+{% block body %}
+   
+    {% include molecule('social-media') with {data: {name: 'social-media'}} only %}
+{% endblock %}
