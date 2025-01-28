@@ -105,8 +105,8 @@ class AntelopeRepository extends AbstractRepository implements
         return $this->getAntelopeLocations($antelopeLocationCriteriaTransfer);
     }
 
-    public function getAntelopeLocations(AntelopeLocationCriteriaTransfer $antelopeLocationCriteriaTransfer): AntelopeLocationCollectionTransfer
-    {
+    public function getAntelopeLocations(AntelopeLocationCriteriaTransfer $antelopeLocationCriteriaTransfer
+    ): AntelopeLocationCollectionTransfer {
         $query = $this->getFactory()->createAntelopeLocationQuery();
         $name = $antelopeLocationCriteriaTransfer->getAntelopeLocationsConditions()->getName();
         if ($name) {
@@ -126,13 +126,11 @@ class AntelopeRepository extends AbstractRepository implements
         );
     }
 
-    public function getAntelopeCollection(AntelopeCriteriaTransfer $antelopeCriteriaTransfer): AntelopeCollectionTransfer
-    {
+    public function getAntelopeCollection(AntelopeCriteriaTransfer $antelopeCriteriaTransfer
+    ): AntelopeCollectionTransfer {
         $query = $this->getFactory()->createAntelopeQuery();
 
-        if ($antelopeCriteriaTransfer->getName() !== null) {
-            $query->filterByName($antelopeCriteriaTransfer->getName());
-        }
+        $this->filterAntelopes($antelopeCriteriaTransfer, $query);
 
         $antelopeEntities = $query->find();
         $antelopeMapper = $this->getFactory()->createAntelopeMapper();
@@ -140,6 +138,27 @@ class AntelopeRepository extends AbstractRepository implements
         return $antelopeMapper->mapAntelopeEntityCollectionToAntelopeCollectionTransfer(
             $antelopeEntities,
         );
+    }
+
+    /**
+     * @param AntelopeCriteriaTransfer $antelopeCriteriaTransfer
+     * @param \Orm\Zed\Antelope\Persistence\PyzAntelopeQuery $query
+     * @return void
+     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
+     */
+    public function filterAntelopes(
+        AntelopeCriteriaTransfer $antelopeCriteriaTransfer,
+        \Orm\Zed\Antelope\Persistence\PyzAntelopeQuery $query
+    ): void {
+        if ($antelopeCriteriaTransfer->getName() !== null) {
+            $query->filterByName($antelopeCriteriaTransfer->getName());
+        }
+        if ($antelopeCriteriaTransfer->getIdAntelope() !== null) {
+            $query->filterByIdAntelope($antelopeCriteriaTransfer->getIdAntelope());
+        }
+        if ($antelopeCriteriaTransfer->getIdsAntelope() !== null) {
+            $query->filterByIdAntelope_In($antelopeCriteriaTransfer->getIdsAntelope());
+        }
     }
 
     public function getAntelopeLocationsCollection(): AntelopeLocationCollectionTransfer

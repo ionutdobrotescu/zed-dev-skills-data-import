@@ -9,7 +9,9 @@
         <column name="color" required="true" type="VARCHAR" size="255"/>
 
         <column name="fk_antelope_location" type="INTEGER"/>
-
+        <behavior name="event">
+            <parameter name="pyz_antelope_all" column="*"/>
+        </behavior>
         <unique name="pyz_antelope-name">
             <unique-column name="name"/>
         </unique>
@@ -23,6 +25,9 @@
         <column name="id_antelope_location" required="true" type="INTEGER"
                 primaryKey="true" autoIncrement="true"/>
         <column name="location_name" required="true" type="VARCHAR" size="120"/>
+        <behavior name="event">
+            <parameter name="pyz_antelope_all" column="*"/>
+        </behavior>
         <unique name="pyz_antelope_location_name">
             <unique-column name="location_name"/>
         </unique>

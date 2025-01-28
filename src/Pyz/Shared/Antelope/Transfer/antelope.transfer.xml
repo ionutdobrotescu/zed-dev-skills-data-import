@@ -4,6 +4,7 @@
 
     <transfer name="Antelope">
         <property name="idAntelope" type="int"/>
+
         <property name="name" type="string"/>
         <property name="color" type="string"/>
 
@@ -28,6 +29,8 @@
     </transfer>
     <transfer name="AntelopeCriteria">
         <property name="name" type="string"/>
+        <property name="idsAntelope" singular="idAntelope" type="array"/>
+
         <property name="idAntelope" type="int"/>
     </transfer>
     <transfer name="AntelopeLocation">

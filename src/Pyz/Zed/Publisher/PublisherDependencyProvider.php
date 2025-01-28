@@ -7,6 +7,8 @@
 
 namespace Pyz\Zed\Publisher;
 
+use Pyz\Shared\AntelopeSearch\AntelopeSearchConfig;
+use Pyz\Zed\AntelopeSearch\Communication\Plugin\Publisher\AntelopeWritePublisherPlugin;
 use Spryker\Shared\GlossaryStorage\GlossaryStorageConfig;
 use Spryker\Shared\PublishAndSynchronizeHealthCheck\PublishAndSynchronizeHealthCheckConfig;
 use Spryker\Zed\AssetStorage\Communication\Plugin\Publisher\Asset\AssetDeletePublisherPlugin;
@@ -121,6 +123,7 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
     protected function getPublisherPlugins(): array
     {
         return array_merge(
+            $this->getAntelopePublishPlugins(),
             $this->getPublishAndSynchronizeHealthCheckPlugins(),
             $this->getGlossaryStoragePlugins(),
             $this->getProductRelationStoragePlugins(),
@@ -141,6 +144,15 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
         );
     }
 
+    protected function getAntelopePublishPlugins(): array
+    {
+        return [
+            AntelopeSearchConfig::ANTELOPE_PUBLISH_SEARCH_QUEUE => [
+                new AntelopeWritePublisherPlugin(),
+            ],
+        ];
+    }
+
     /**
      * @return array<mixed>
      */
@@ -151,40 +163,6 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
                 new PublishAndSynchronizeHealthCheckStorageWritePublisherPlugin(),
                 new PublishAndSynchronizeHealthCheckSearchWritePublisherPlugin(),
             ],
-        ];
-    }
-
-    /**
-     * @return array<\Spryker\Zed\PublisherExtension\Dependency\Plugin\PublisherTriggerPluginInterface>
-     */
-    protected function getPublisherTriggerPlugins(): array
-    {
-        return [
-            new GlossaryPublisherTriggerPlugin(),
-            new ProductRelationPublisherTriggerPlugin(),
-            new ProductAbstractLabelPublisherTriggerPlugin(),
-            new ProductLabelDictionaryPublisherTriggerPlugin(),
-            new ReturnReasonPublisherTriggerPlugin(),
-            new ProductBundlePublisherTriggerPlugin(),
-            new ProductConfigurationPublisherTriggerPlugin(),
-            new CategoryNodePublisherTriggerPlugin(),
-            new CategoryTreePublisherTriggerPlugin(),
-            new ProductCategoryPublisherTriggerPlugin(),
-            new CategoryPagePublisherTriggerPlugin(),
-            new ProductConcretePublisherTriggerPlugin(),
-            new ProductAlternativePublisherTriggerPlugin(),
-            new ProductDiscontinuedPublisherTriggerPlugin(),
-            new TaxSetPublisherTriggerPlugin(),
-            new TaxProductPublisherTriggerPlugin(),
-            new PublishAndSynchronizeHealthCheckSearchPublisherTriggerPlugin(),
-            new PublishAndSynchronizeHealthCheckPublisherTriggerPlugin(),
-            new ProductListPublisherTriggerPlugin(),
-            new ProductListSearchPublisherTriggerPlugin(),
-            new ProductLabelSearchPublisherTriggerPlugin(),
-            new CategoryImagePublisherTriggerPlugin(),
-            new FileManagerPublisherTriggerPlugin(),
-            new AssetPublisherTriggerPlugin(),
-            new CustomerAccessPublisherTriggerPlugin(),
         ];
     }
 
@@ -212,17 +190,6 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
             new ProductRelationWriteForPublishingPublisherPlugin(),
             new ProductRelationProductAbstractWritePublisherPlugin(),
             new ProductRelationStoreWritePublisherPlugin(),
-        ];
-    }
-
-    /**
-     * @return array<\Spryker\Zed\PublisherExtension\Dependency\Plugin\PublisherPluginInterface>
-     */
-    protected function getProductConfigurationStoragePlugins(): array
-    {
-        return [
-            new ProductConfigurationWritePublisherPlugin(),
-            new ProductConfigurationDeletePublisherPlugin(),
         ];
     }
 
@@ -278,6 +245,17 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
     /**
      * @return array<\Spryker\Zed\PublisherExtension\Dependency\Plugin\PublisherPluginInterface>
      */
+    protected function getProductConfigurationStoragePlugins(): array
+    {
+        return [
+            new ProductConfigurationWritePublisherPlugin(),
+            new ProductConfigurationDeletePublisherPlugin(),
+        ];
+    }
+
+    /**
+     * @return array<\Spryker\Zed\PublisherExtension\Dependency\Plugin\PublisherPluginInterface>
+     */
     protected function getCategoryStoragePlugins(): array
     {
         return [
@@ -327,6 +305,16 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
     }
 
     /**
+     * @return list<\Spryker\Zed\PublisherExtension\Dependency\Plugin\PublisherPluginInterface>
+     */
+    public function getProductAbstractPageSearchPlugins(): array
+    {
+        return [
+            new CategoryStoreProductAbstractPageSearchWritePublisherPlugin(),
+        ];
+    }
+
+    /**
      * @return array<\Spryker\Zed\PublisherExtension\Dependency\Plugin\PublisherPluginInterface>
      */
     protected function getProductCategoryStoragePlugins(): array
@@ -344,6 +332,21 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
             new CategoryUrlAndResourceCategorynodeWritePublisherPlugin(),
             new ProductCategoryWriteForPublishingPublisherPlugin(),
             new ProductCategoryWritePublisherPlugin(),
+        ];
+    }
+
+    /**
+     * @return array<\Spryker\Zed\PublisherExtension\Dependency\Plugin\PublisherPluginInterface>
+     */
+    protected function getStoreStoragePlugins(): array
+    {
+        return [
+            new StoreWritePublisherPlugin(),
+            new StoreSynchronizationTriggeringPublisherPlugin(),
+            new CurrencyStoreWritePublisherPlugin(),
+            new CountryStoreWritePublisherPlugin(),
+            new LocaleStoreWritePublisherPlugin(),
+            new ContextStoreWritePublisherPlugin(),
         ];
     }
 
@@ -385,27 +388,37 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
     }
 
     /**
-     * @return array<\Spryker\Zed\PublisherExtension\Dependency\Plugin\PublisherPluginInterface>
+     * @return array<\Spryker\Zed\PublisherExtension\Dependency\Plugin\PublisherTriggerPluginInterface>
      */
-    protected function getStoreStoragePlugins(): array
+    protected function getPublisherTriggerPlugins(): array
     {
         return [
-            new StoreWritePublisherPlugin(),
-            new StoreSynchronizationTriggeringPublisherPlugin(),
-            new CurrencyStoreWritePublisherPlugin(),
-            new CountryStoreWritePublisherPlugin(),
-            new LocaleStoreWritePublisherPlugin(),
-            new ContextStoreWritePublisherPlugin(),
-        ];
-    }
 
-    /**
-     * @return list<\Spryker\Zed\PublisherExtension\Dependency\Plugin\PublisherPluginInterface>
-     */
-    public function getProductAbstractPageSearchPlugins(): array
-    {
-        return [
-            new CategoryStoreProductAbstractPageSearchWritePublisherPlugin(),
+            new GlossaryPublisherTriggerPlugin(),
+            new ProductRelationPublisherTriggerPlugin(),
+            new ProductAbstractLabelPublisherTriggerPlugin(),
+            new ProductLabelDictionaryPublisherTriggerPlugin(),
+            new ReturnReasonPublisherTriggerPlugin(),
+            new ProductBundlePublisherTriggerPlugin(),
+            new ProductConfigurationPublisherTriggerPlugin(),
+            new CategoryNodePublisherTriggerPlugin(),
+            new CategoryTreePublisherTriggerPlugin(),
+            new ProductCategoryPublisherTriggerPlugin(),
+            new CategoryPagePublisherTriggerPlugin(),
+            new ProductConcretePublisherTriggerPlugin(),
+            new ProductAlternativePublisherTriggerPlugin(),
+            new ProductDiscontinuedPublisherTriggerPlugin(),
+            new TaxSetPublisherTriggerPlugin(),
+            new TaxProductPublisherTriggerPlugin(),
+            new PublishAndSynchronizeHealthCheckSearchPublisherTriggerPlugin(),
+            new PublishAndSynchronizeHealthCheckPublisherTriggerPlugin(),
+            new ProductListPublisherTriggerPlugin(),
+            new ProductListSearchPublisherTriggerPlugin(),
+            new ProductLabelSearchPublisherTriggerPlugin(),
+            new CategoryImagePublisherTriggerPlugin(),
+            new FileManagerPublisherTriggerPlugin(),
+            new AssetPublisherTriggerPlugin(),
+            new CustomerAccessPublisherTriggerPlugin(),
         ];
     }
 }

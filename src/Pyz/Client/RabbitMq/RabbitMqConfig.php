@@ -7,6 +7,7 @@
 
 namespace Pyz\Client\RabbitMq;
 
+use Pyz\Shared\AntelopeSearch\AntelopeSearchConfig;
 use Spryker\Client\RabbitMq\RabbitMqConfig as SprykerRabbitMqConfig;
 use Spryker\Shared\AssetStorage\AssetStorageConfig;
 use Spryker\Shared\AvailabilityStorage\AvailabilityStorageConfig;
@@ -62,6 +63,19 @@ class RabbitMqConfig extends SprykerRabbitMqConfig
     }
 
     /**
+     * @return array<string>
+     */
+    protected function getQueueConnectionNames(): array
+    {
+        return array_map(
+            function (array $connection): string {
+                return $connection[RabbitMqEnv::RABBITMQ_CONNECTION_NAME];
+            },
+            $this->get(RabbitMqEnv::RABBITMQ_CONNECTIONS),
+        );
+    }
+
+    /**
      * @return string|null
      */
     public function getDefaultLocaleCode(): ?string
@@ -100,6 +114,7 @@ class RabbitMqConfig extends SprykerRabbitMqConfig
     protected function getPublishQueueConfiguration(): array
     {
         return [
+            AntelopeSearchConfig::ANTELOPE_PUBLISH_SEARCH_QUEUE,
             PublisherConfig::PUBLISH_QUEUE => [
                 PublisherConfig::PUBLISH_ROUTING_KEY_RETRY => PublisherConfig::PUBLISH_RETRY_QUEUE,
                 PublisherConfig::PUBLISH_ROUTING_KEY_ERROR => PublisherConfig::PUBLISH_ERROR_QUEUE,
@@ -126,6 +141,7 @@ class RabbitMqConfig extends SprykerRabbitMqConfig
     protected function getSynchronizationQueueConfiguration(): array
     {
         return [
+            AntelopeSearchConfig::ANTELOPE_SYNC_SEARCH_QUEUE,
             PublishAndSynchronizeHealthCheckSearchConfig::SYNC_SEARCH_PUBLISH_AND_SYNCHRONIZE_HEALTH_CHECK,
             PublishAndSynchronizeHealthCheckStorageConfig::SYNC_STORAGE_PUBLISH_AND_SYNCHRONIZE_HEALTH_CHECK,
             GlossaryStorageConfig::SYNC_STORAGE_TRANSLATION,
@@ -160,18 +176,5 @@ class RabbitMqConfig extends SprykerRabbitMqConfig
     protected function getDefaultBoundQueueNamePrefix(): string
     {
         return 'error';
-    }
-
-    /**
-     * @return array<string>
-     */
-    protected function getQueueConnectionNames(): array
-    {
-        return array_map(
-            function (array $connection): string {
-                return $connection[RabbitMqEnv::RABBITMQ_CONNECTION_NAME];
-            },
-            $this->get(RabbitMqEnv::RABBITMQ_CONNECTIONS),
-        );
     }
 }
