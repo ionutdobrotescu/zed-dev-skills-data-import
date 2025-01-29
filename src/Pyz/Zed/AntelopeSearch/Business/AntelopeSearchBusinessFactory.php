@@ -1,10 +1,15 @@
 <?php
 
+/**
+ * This file is part of the Spryker Commerce OS.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 namespace Pyz\Zed\AntelopeSearch\Business;
 
 use Pyz\Zed\Antelope\Business\AntelopeFacadeInterface;
 use Pyz\Zed\AntelopeSearch\AntelopeSearchDependencyProvider;
-use Pyz\Zed\AntelopeSearch\Business\Writer\AntelopeSearchWriter;
+use Pyz\Zed\AntelopeSearch\Business\Writer\AntelopeLocationSearchWriter;
 use Spryker\Zed\EventBehavior\Business\EventBehaviorFacadeInterface;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 
@@ -15,11 +20,11 @@ use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 class AntelopeSearchBusinessFactory extends AbstractBusinessFactory
 {
     /**
-     * @return \Pyz\Zed\AntelopeSearch\Business\Writer\AntelopeSearchWriter
+     * @return \Pyz\Zed\AntelopeSearch\Business\Writer\AntelopeLocationSearchWriter
      */
-    public function createAntelopeSearchWriter(): AntelopeSearchWriter
+    public function createAntelopeSearchWriter(): AntelopeLocationSearchWriter
     {
-        return new AntelopeSearchWriter(
+        return new AntelopeLocationSearchWriter(
             $this->getEventBehaviorFacade(),
             $this->getAntelopeFacade(),
             $this->getRepository(),

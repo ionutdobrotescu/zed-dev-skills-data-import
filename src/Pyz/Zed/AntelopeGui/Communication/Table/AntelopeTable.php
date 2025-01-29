@@ -11,7 +11,6 @@ namespace Pyz\Zed\AntelopeGui\Communication\Table;
 
 use Orm\Zed\Antelope\Persistence\Map\PyzAntelopeLocationTableMap;
 use Orm\Zed\Antelope\Persistence\Map\PyzAntelopeTableMap;
-use Orm\Zed\Antelope\Persistence\PyzAntelope;
 use Orm\Zed\Antelope\Persistence\PyzAntelopeQuery;
 use Propel\Runtime\Collection\ObjectCollection;
 use Spryker\Zed\Gui\Communication\Table\AbstractTable;
@@ -22,45 +21,45 @@ class AntelopeTable extends AbstractTable
     public const string COL_ID_ANTELOPE = PyzAntelopeTableMap::COL_ID_ANTELOPE;
 
     public const string COL_NAME = PyzAntelopeTableMap::COL_NAME;
-    public const string COL_ANTELOPE_LOCATION_NAME = PyzAntelopeLocationTableMap::COL_LOCATION_NAME;
 
+    public const string COL_ANTELOPE_LOCATION_NAME = PyzAntelopeLocationTableMap::COL_LOCATION_NAME;
 
     public function __construct(protected PyzAntelopeQuery $antelopeQuery)
     {
     }
 
     /**
-     * @param TableConfiguration $config
+     * @param \Spryker\Zed\Gui\Communication\Table\TableConfiguration $config
      *
-     * @return TableConfiguration
+     * @return \Spryker\Zed\Gui\Communication\Table\TableConfiguration
      */
     protected function configure(TableConfiguration $config): TableConfiguration
     {
         $config->setHeader([
             static::COL_ID_ANTELOPE => 'Antelope ID',
             static::COL_NAME => 'Name',
-            static::COL_ANTELOPE_LOCATION_NAME => 'Location'
+            static::COL_ANTELOPE_LOCATION_NAME => 'Location',
 
         ]);
 
         $config->setSortable([
             static::COL_ID_ANTELOPE,
             static::COL_NAME,
-            static::COL_ANTELOPE_LOCATION_NAME
+            static::COL_ANTELOPE_LOCATION_NAME,
 
         ]);
 
         $config->setSearchable([
             static::COL_ID_ANTELOPE,
             static::COL_NAME,
-            static::COL_ANTELOPE_LOCATION_NAME
+            static::COL_ANTELOPE_LOCATION_NAME,
         ]);
 
         return $config;
     }
 
     /**
-     * @param TableConfiguration $config
+     * @param \Spryker\Zed\Gui\Communication\Table\TableConfiguration $config
      *
      * @return array
      */
@@ -81,14 +80,14 @@ class AntelopeTable extends AbstractTable
     }
 
     /**
-     * @param ObjectCollection<PyzAntelope> $antelopeEntityCollection
+     * @param \Propel\Runtime\Collection\ObjectCollection<\Pyz\Zed\AntelopeGui\Communication\Table\PyzAntelope> $antelopeEntityCollection
      *
      * @return array<int, mixed>
      */
     protected function mapReturns(ObjectCollection $antelopeEntityCollection): array
     {
         $returns = [];
-        /** @var PyzAntelope $antelopeEntity */
+        /** @var \Orm\Zed\Antelope\Persistence\PyzAntelope $antelopeEntity */
         foreach ($antelopeEntityCollection as $antelopeEntity) {
             $antelopeLocation = $antelopeEntity->getPyzAntelopeLocation();
             $locationName = $antelopeLocation ? $antelopeLocation->getLocationName() : '';

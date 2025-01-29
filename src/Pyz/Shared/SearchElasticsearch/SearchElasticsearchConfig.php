@@ -18,6 +18,7 @@ class SearchElasticsearchConfig extends SprykerSearchElasticsearchConfig
         'page',
         'product-review',
         'return_reason',
-        'antelope'
+        'antelope',
+        'antelope-location',
     ];
 }

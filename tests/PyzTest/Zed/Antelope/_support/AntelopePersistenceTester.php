@@ -1,11 +1,19 @@
 <?php
 
+/**
+ * This file is part of the Spryker Commerce OS.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace PyzTest\Zed\Antelope;
 
+use Codeception\Actor;
+
 /**
  * Inherited Methods
+ *
  * @method void wantTo($text)
  * @method void wantToTest($text)
  * @method void execute($callable)
@@ -18,8 +26,8 @@ namespace PyzTest\Zed\Antelope;
  * @method void pause($vars = [])
  *
  * @SuppressWarnings(PHPMD)
-*/
-class AntelopePersistenceTester extends \Codeception\Actor
+ */
+class AntelopePersistenceTester extends Actor
 {
     use _generated\AntelopePersistenceTesterActions;
 

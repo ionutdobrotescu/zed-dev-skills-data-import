@@ -1,8 +1,12 @@
 <?php
 
+/**
+ * This file is part of the Spryker Commerce OS.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 namespace Pyz\Zed\AntelopeSearch\Communication\Plugin\Publisher;
 
-use Generated\Shared\Transfer\EventEntityTransfer;
 use Pyz\Shared\AntelopeSearch\AntelopeSearchConfig;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 use Spryker\Zed\PublisherExtension\Dependency\Plugin\PublisherPluginInterface;
@@ -15,12 +19,12 @@ class AntelopeWritePublisherPlugin extends AbstractPlugin implements PublisherPl
     /**
      * {@inheritDoc}
      *
-     * @param array<EventEntityTransfer> $eventEntityTransfers
+     * @api
+     *
+     * @param array<\Pyz\Zed\AntelopeSearch\Communication\Plugin\Publisher\EventEntityTransfer> $eventEntityTransfers
      * @param string $eventName
      *
      * @return void
-     * @api
-     *
      */
     public function handleBulk(array $eventEntityTransfers, $eventName): void
     {
@@ -30,9 +34,9 @@ class AntelopeWritePublisherPlugin extends AbstractPlugin implements PublisherPl
     /**
      * {@inheritDoc}
      *
-     * @return array<string>
      * @api
      *
+     * @return array<string>
      */
     public function getSubscribedEvents(): array
     {

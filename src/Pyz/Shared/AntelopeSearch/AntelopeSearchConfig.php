@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * This file is part of the Spryker Commerce OS.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 namespace Pyz\Shared\AntelopeSearch;
 
 use Spryker\Shared\Kernel\AbstractBundleConfig;
@@ -75,5 +80,6 @@ class AntelopeSearchConfig extends AbstractBundleConfig
      * @var string
      */
     public const string ANTELOPE_UNPUBLISH = 'AntelopeSearch.antelope.unpublish';
+
     public const int ANTELOPE_PUBLISH_BATCH_SIZE = 100;
 }

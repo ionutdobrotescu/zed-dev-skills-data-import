@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * This file is part of the Spryker Commerce OS.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 namespace Pyz\Zed\AntelopeSearch;
 
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
@@ -34,7 +39,7 @@ class AntelopeSearchDependencyProvider extends AbstractBundleDependencyProvider
     {
         $container->set(
             self::FACADE_EVENT_BEHAVIOR,
-            fn() => $container->getLocator()->eventBehavior()->facade()
+            fn () => $container->getLocator()->eventBehavior()->facade(),
         );
 
         return $container;

@@ -10,6 +10,8 @@ declare(strict_types=1);
 namespace Pyz\Zed\AntelopeDataImport\Business;
 
 use Generated\Shared\Transfer\DataImporterConfigurationTransfer;
+use Pyz\Zed\Antelope\Business\AntelopeFacadeInterface;
+use Pyz\Zed\AntelopeDataImport\AntelopeDataImportDependencyProvider;
 use Pyz\Zed\AntelopeDataImport\Business\Antelope\DataImportStep\AntelopeWriterStep;
 use Pyz\Zed\AntelopeDataImport\Business\AntelopeLocation\DataImportStep\AntelopeLocationWriterStep;
 use Spryker\Zed\DataImport\Business\DataImportBusinessFactory;
@@ -35,7 +37,12 @@ class AntelopeDataImportBusinessFactory extends DataImportBusinessFactory
 
     public function createAntelopeWriterStep(): AntelopeWriterStep
     {
-        return new AntelopeWriterStep();
+        return new AntelopeWriterStep($this->getAntelopeFacade());
+    }
+
+    protected function getAntelopeFacade(): AntelopeFacadeInterface
+    {
+        return $this->getProvidedDependency(AntelopeDataImportDependencyProvider::FACADE_ANTELOPE);
     }
 
     public function createAntelopeLocationDataImport(

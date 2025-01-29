@@ -7,8 +7,8 @@
 
 namespace Pyz\Yves\Router;
 
-use Pyz\Yves\ExampleProductSalePage\Plugin\Router\ExampleProductSaleRouteProviderPlugin;
 use Pyz\Yves\AntelopePage\Plugin\Router\AntelopePageRouteProviderPlugin;
+use Pyz\Yves\ExampleProductSalePage\Plugin\Router\ExampleProductSaleRouteProviderPlugin;
 use Spryker\Yves\HealthCheck\Plugin\Router\HealthCheckRouteProviderPlugin;
 use Spryker\Yves\Router\Plugin\RouteManipulator\LanguageDefaultPostAddRouteManipulatorPlugin;
 use Spryker\Yves\Router\Plugin\RouteManipulator\SslPostAddRouteManipulatorPlugin;

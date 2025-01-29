@@ -1,8 +1,11 @@
 <?php
 
-namespace Pyz\Zed\AntelopeSearch\Business;
+/**
+ * This file is part of the Spryker Commerce OS.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
 
-use Generated\Shared\Transfer\EventEntityTransfer;
+namespace Pyz\Zed\AntelopeSearch\Business;
 
 interface AntelopeSearchFacadeInterface
 {
@@ -12,11 +15,11 @@ interface AntelopeSearchFacadeInterface
      * - Updates entities from `pyz_antelope_search` with actual data from obtained antelopes.
      * - Sends a copy of data to queue based on module config.
      *
-     * @param array<EventEntityTransfer> $eventTransfers
-     *
-     * @return void
      * @api
      *
+     * @param array<\Pyz\Zed\AntelopeSearch\Business\EventEntityTransfer> $eventTransfers
+     *
+     * @return void
      */
     public function writeCollectionByAntelopeEvents(array $eventTransfers): void;
 }

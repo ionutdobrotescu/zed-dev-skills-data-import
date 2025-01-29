@@ -1,12 +1,17 @@
 <?php
 
+/**
+ * This file is part of the Spryker Commerce OS.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 namespace Pyz\Zed\AntelopeSearch\Business\Writer;
 
 use Generated\Shared\Transfer\AntelopeCriteriaTransfer;
 use Generated\Shared\Transfer\AntelopeSearchCriteriaTransfer;
 use Generated\Shared\Transfer\AntelopeSearchTransfer;
 use Generated\Shared\Transfer\AntelopeTransfer;
-use Pyz\Shared\AntelopeSearch\AntelopeSearchConfig;
+use Pyz\Shared\AntelopeSearch\AntelopeLocationSearchConfig;
 use Pyz\Zed\Antelope\Business\AntelopeFacadeInterface;
 use Pyz\Zed\AntelopeSearch\Persistence\AntelopeSearchEntityManagerInterface;
 use Pyz\Zed\AntelopeSearch\Persistence\AntelopeSearchRepositoryInterface;
@@ -22,6 +27,9 @@ class AntelopeSearchWriter
     ) {
     }
 
+    /**
+     * @return void
+     */
     public function writeCollectionByAntelopeEvents(array $eventTransfers): void
     {
         $antelopeIds = $this->eventBehaviorFacade->getEventTransferIds($eventTransfers);
@@ -29,25 +37,28 @@ class AntelopeSearchWriter
         $this->writeCollectionByAntelopeIds($antelopeIds);
     }
 
+    /**
+     * @return void
+     */
     protected function writeCollectionByAntelopeIds(array $antelopeIds): void
     {
         if (!$antelopeIds) {
             return;
         }
 
-        $batchSize = AntelopeSearchConfig::ANTELOPE_PUBLISH_BATCH_SIZE;
+        $batchSize = AntelopeLocationSearchConfig::ANTELOPE_PUBLISH_BATCH_SIZE;
         $batches = array_chunk($antelopeIds, $batchSize);
         foreach ($batches as $batch) {
             $antelopeTransfersIndexed = $this->getAntelopeTransfersIndexed($batch);
             $antelopeSearchTransfersIndexed = $this->getAntelopeSearchTransfersIndexed(
-                array_keys($antelopeTransfersIndexed)
+                array_keys($antelopeTransfersIndexed),
             );
 
             foreach ($antelopeTransfersIndexed as $antelopeId => $antelopeTransfer) {
                 $this->processAntelopeTransfer(
                     $antelopeId,
                     $antelopeTransfer,
-                    $antelopeSearchTransfersIndexed[$antelopeId] ?? null
+                    $antelopeSearchTransfersIndexed[$antelopeId] ?? null,
                 );
             }
         }
@@ -68,6 +79,7 @@ class AntelopeSearchWriter
             $key = $transfer->{$keyGetter}();
             $indexedTransfers[$key] = $transfer;
         }
+
         return $indexedTransfers;
     }
 
@@ -75,16 +87,19 @@ class AntelopeSearchWriter
     {
         $antelopeSearchCriteriaTransfer = (new AntelopeSearchCriteriaTransfer())->setFksAntelope($antelopeIds);
         $antelopeSearchTransfers = $this->antelopeSearchRepository->getAntelopeSearches(
-            $antelopeSearchCriteriaTransfer
+            $antelopeSearchCriteriaTransfer,
         );
 
         return $this->indexTransfers($antelopeSearchTransfers, 'getFkAntelope');
     }
 
+    /**
+     * @return void
+     */
     protected function processAntelopeTransfer(
         int $antelopeId,
         AntelopeTransfer $antelopeTransfer,
-        ?AntelopeSearchTransfer $antelopeSearchTransfer = null
+        ?AntelopeSearchTransfer $antelopeSearchTransfer = null,
     ): void {
         $searchData = $antelopeTransfer->toArray();
 

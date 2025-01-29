@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * This file is part of the Spryker Commerce OS.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 namespace PyzTest\Zed\Antelope\Business;
 
 use Codeception\Test\Unit;
@@ -16,20 +21,25 @@ use Pyz\Zed\Antelope\Business\AntelopeLocation\Reader\AntelopeLocationReader;
 use Pyz\Zed\Antelope\Business\AntelopeLocation\Writer\AntelopeLocationUpdater;
 
 /**
+ * Auto-generated group annotations
+ *
  * @group PyzTest
  * @group Zed
  * @group Antelope
  * @group Business
+ * @group Facade
  * @group AntelopeFacadeTest
+ * Add your own group annotations below this line
  */
 class AntelopeFacadeTest extends Unit
 {
-
     protected AntelopeFacadeInterface $antelopeFacade;
-
 
     protected AntelopeBusinessFactory $businessFactoryMock;
 
+    /**
+     * @return void
+     */
     public function testCreateAntelope(): void
     {
         // Arrange
@@ -53,6 +63,9 @@ class AntelopeFacadeTest extends Unit
         $this->assertSame($expectedAntelopeTransfer, $result);
     }
 
+    /**
+     * @return void
+     */
     public function testGetAntelopeLocationById(): void
     {
         // Arrange
@@ -76,6 +89,9 @@ class AntelopeFacadeTest extends Unit
         $this->assertSame($expectedAntelopeLocationTransfer, $result);
     }
 
+    /**
+     * @return void
+     */
     public function testGetAntelope(): void
     {
         // Arrange
@@ -99,6 +115,9 @@ class AntelopeFacadeTest extends Unit
         $this->assertSame($expectedResponse, $result);
     }
 
+    /**
+     * @return void
+     */
     public function testCreateAntelopeLocation(): void
     {
         // Arrange
@@ -109,7 +128,6 @@ class AntelopeFacadeTest extends Unit
         $this->businessFactoryMock->expects($this->once())
             ->method('createAntelopeLocationWriter')
             ->willReturn($antelopeLocationWriterMock);
-
 
         $antelopeLocationWriterMock->expects($this->once())
             ->method('createAntelopeLocation')
@@ -123,6 +141,9 @@ class AntelopeFacadeTest extends Unit
         $this->assertSame($expectedAntelopeLocationTransfer, $result);
     }
 
+    /**
+     * @return void
+     */
     protected function _before(): void
     {
         parent::_before();

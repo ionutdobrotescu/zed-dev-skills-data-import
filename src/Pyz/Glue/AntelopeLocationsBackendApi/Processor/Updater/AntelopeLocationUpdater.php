@@ -35,11 +35,11 @@ class AntelopeLocationUpdater implements AntelopeUpdaterInterface
         );
         $antelopeLocationTransfer = $this->antelopeFacade->updateAntelopeLocation($antelopeLocationTransfer);
         $antelopeLocationCollectionTransfer = (new AntelopeLocationCollectionTransfer())->addAntelopeLocation(
-            $antelopeLocationTransfer
+            $antelopeLocationTransfer,
         );
 
         return $this->antelopeLocationResponseBuilder->createAntelopeLocationResponse(
-            $antelopeLocationCollectionTransfer
+            $antelopeLocationCollectionTransfer,
         );
     }
 }

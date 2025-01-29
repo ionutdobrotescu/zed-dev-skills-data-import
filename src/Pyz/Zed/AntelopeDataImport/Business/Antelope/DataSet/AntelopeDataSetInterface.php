@@ -14,10 +14,12 @@ interface AntelopeDataSetInterface
     /**
      * @var string
      */
-    public const COLUMN_NAME = 'name';
+    public const string COLUMN_NAME = 'name';
 
     /**
      * @var string
      */
-    public const COLUMN_COLOR = 'color';
+    public const string COLUMN_COLOR = 'color';
+
+    public const string COLUMN_ID_LOCATION = 'idLocation';
 }

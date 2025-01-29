@@ -26,7 +26,6 @@ class AntelopeLocationReader implements AntelopeLocationReaderInterface
         private readonly AntelopeLocationResponseBuilderInterface $antelopeLocationResponseBuilder,
         private readonly AntelopeLocationExpanderInterface $antelopeLocationExpander,
         private readonly ErrorResponseBuilderInterface $errorResponseBuilder,
-
     ) {
     }
 
@@ -44,7 +43,7 @@ class AntelopeLocationReader implements AntelopeLocationReaderInterface
     /**
      * @param \Generated\Shared\Transfer\AntelopeLocationCriteriaTransfer $antelopeCriteriaTransfer
      *
-     * @return GlueResponseTransfer
+     * @return \Generated\Shared\Transfer\GlueResponseTransfer
      */
     public function getAntelopeLocationCollectionTransfer(
         AntelopeLocationCriteriaTransfer $antelopeLocationCriteriaTransfer,
@@ -54,6 +53,7 @@ class AntelopeLocationReader implements AntelopeLocationReaderInterface
         if (!$antelopeLocationCollectionTransfer->getAntelopeLocations()->count()) {
             return $this->respondWithErrors();
         }
+
         return $this->antelopeLocationResponseBuilder->createAntelopeLocationResponse(
             $antelopeLocationCollectionTransfer,
         );
@@ -76,7 +76,7 @@ class AntelopeLocationReader implements AntelopeLocationReaderInterface
     }
 
     /**
-     * @return GlueResponseTransfer
+     * @return \Generated\Shared\Transfer\GlueResponseTransfer
      */
     public function respondWithErrors(): GlueResponseTransfer
     {
@@ -87,6 +87,7 @@ class AntelopeLocationReader implements AntelopeLocationReaderInterface
         );
         $errorTransfers = new ArrayObject();
         $errorTransfers->append($errorTransfer);
+
         return $this->errorResponseBuilder->createErrorResponse(
             $errorTransfers,
         );

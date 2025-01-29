@@ -7,6 +7,7 @@
 
 namespace Pyz\Client\RabbitMq;
 
+use Pyz\Shared\AntelopeLocationSearch\AntelopeLocationSearchConfig;
 use Pyz\Shared\AntelopeSearch\AntelopeSearchConfig;
 use Spryker\Client\RabbitMq\RabbitMqConfig as SprykerRabbitMqConfig;
 use Spryker\Shared\AssetStorage\AssetStorageConfig;
@@ -114,6 +115,7 @@ class RabbitMqConfig extends SprykerRabbitMqConfig
     protected function getPublishQueueConfiguration(): array
     {
         return [
+            AntelopeLocationSearchConfig::ANTELOPE_LOCATION_PUBLISH_SEARCH_QUEUE,
             AntelopeSearchConfig::ANTELOPE_PUBLISH_SEARCH_QUEUE,
             PublisherConfig::PUBLISH_QUEUE => [
                 PublisherConfig::PUBLISH_ROUTING_KEY_RETRY => PublisherConfig::PUBLISH_RETRY_QUEUE,
@@ -142,6 +144,7 @@ class RabbitMqConfig extends SprykerRabbitMqConfig
     {
         return [
             AntelopeSearchConfig::ANTELOPE_SYNC_SEARCH_QUEUE,
+            AntelopeLocationSearchConfig::ANTELOPE_LOCATION_SYNC_SEARCH_QUEUE,
             PublishAndSynchronizeHealthCheckSearchConfig::SYNC_SEARCH_PUBLISH_AND_SYNCHRONIZE_HEALTH_CHECK,
             PublishAndSynchronizeHealthCheckStorageConfig::SYNC_STORAGE_PUBLISH_AND_SYNCHRONIZE_HEALTH_CHECK,
             GlossaryStorageConfig::SYNC_STORAGE_TRANSLATION,

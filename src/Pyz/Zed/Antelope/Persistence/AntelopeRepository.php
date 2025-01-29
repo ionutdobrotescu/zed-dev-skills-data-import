@@ -14,6 +14,7 @@ use Generated\Shared\Transfer\AntelopeLocationCriteriaTransfer;
 use Generated\Shared\Transfer\AntelopeLocationResponseTransfer;
 use Generated\Shared\Transfer\AntelopeLocationTransfer;
 use Generated\Shared\Transfer\AntelopeTransfer;
+use Orm\Zed\Antelope\Persistence\PyzAntelopeQuery;
 use Pyz\Zed\Antelope\Persistence\Exception\EntityNotFoundException;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
@@ -105,8 +106,8 @@ class AntelopeRepository extends AbstractRepository implements
         return $this->getAntelopeLocations($antelopeLocationCriteriaTransfer);
     }
 
-    public function getAntelopeLocations(AntelopeLocationCriteriaTransfer $antelopeLocationCriteriaTransfer
-    ): AntelopeLocationCollectionTransfer {
+    public function getAntelopeLocations(AntelopeLocationCriteriaTransfer $antelopeLocationCriteriaTransfer): AntelopeLocationCollectionTransfer
+    {
         $query = $this->getFactory()->createAntelopeLocationQuery();
         $name = $antelopeLocationCriteriaTransfer->getAntelopeLocationsConditions()->getName();
         if ($name) {
@@ -116,7 +117,10 @@ class AntelopeRepository extends AbstractRepository implements
         if ($idLocation) {
             $query->filterByIdAntelopeLocation($idLocation);
         }
-
+        $idLocations = $antelopeLocationCriteriaTransfer->getAntelopeLocationsConditions()->getAntelopeLocationsIds();
+        if ($idLocations) {
+            $query->filterByIdAntelopeLocation_In($idLocations);
+        }
         $antelopeLocations = $query->find();
 
         $antelopeLocationMapper = $this->getFactory()->createAntelopeLocationMapper();
@@ -126,8 +130,8 @@ class AntelopeRepository extends AbstractRepository implements
         );
     }
 
-    public function getAntelopeCollection(AntelopeCriteriaTransfer $antelopeCriteriaTransfer
-    ): AntelopeCollectionTransfer {
+    public function getAntelopeCollection(AntelopeCriteriaTransfer $antelopeCriteriaTransfer): AntelopeCollectionTransfer
+    {
         $query = $this->getFactory()->createAntelopeQuery();
 
         $this->filterAntelopes($antelopeCriteriaTransfer, $query);
@@ -141,14 +145,14 @@ class AntelopeRepository extends AbstractRepository implements
     }
 
     /**
-     * @param AntelopeCriteriaTransfer $antelopeCriteriaTransfer
+     * @param \Generated\Shared\Transfer\AntelopeCriteriaTransfer $antelopeCriteriaTransfer
      * @param \Orm\Zed\Antelope\Persistence\PyzAntelopeQuery $query
+     *
      * @return void
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     public function filterAntelopes(
         AntelopeCriteriaTransfer $antelopeCriteriaTransfer,
-        \Orm\Zed\Antelope\Persistence\PyzAntelopeQuery $query
+        PyzAntelopeQuery $query,
     ): void {
         if ($antelopeCriteriaTransfer->getName() !== null) {
             $query->filterByName($antelopeCriteriaTransfer->getName());
@@ -161,8 +165,9 @@ class AntelopeRepository extends AbstractRepository implements
         }
     }
 
-    public function getAntelopeLocationsCollection(): AntelopeLocationCollectionTransfer
-    {
-        return $this->getAntelopeLocations(new AntelopeLocationCriteriaTransfer());
+    public function getAntelopeLocationsCollection(
+        AntelopeLocationCriteriaTransfer $antelopeLocationCriteriaTransfer,
+    ): AntelopeLocationCollectionTransfer {
+        return $this->getAntelopeLocations($antelopeLocationCriteriaTransfer);
     }
 }
