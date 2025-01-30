@@ -11,7 +11,7 @@ use Generated\Shared\Transfer\AntelopeCriteriaTransfer;
 use Generated\Shared\Transfer\AntelopeSearchCriteriaTransfer;
 use Generated\Shared\Transfer\AntelopeSearchTransfer;
 use Generated\Shared\Transfer\AntelopeTransfer;
-use Pyz\Shared\AntelopeSearch\AntelopeLocationSearchConfig;
+use Pyz\Shared\AntelopeSearch\AntelopeSearchConfig;
 use Pyz\Zed\Antelope\Business\AntelopeFacadeInterface;
 use Pyz\Zed\AntelopeSearch\Persistence\AntelopeSearchEntityManagerInterface;
 use Pyz\Zed\AntelopeSearch\Persistence\AntelopeSearchRepositoryInterface;
@@ -46,7 +46,7 @@ class AntelopeSearchWriter
             return;
         }
 
-        $batchSize = AntelopeLocationSearchConfig::ANTELOPE_PUBLISH_BATCH_SIZE;
+        $batchSize = AntelopeSearchConfig::ANTELOPE_PUBLISH_BATCH_SIZE;
         $batches = array_chunk($antelopeIds, $batchSize);
         foreach ($batches as $batch) {
             $antelopeTransfersIndexed = $this->getAntelopeTransfersIndexed($batch);

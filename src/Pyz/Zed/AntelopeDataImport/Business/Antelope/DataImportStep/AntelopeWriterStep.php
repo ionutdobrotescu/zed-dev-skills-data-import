@@ -45,7 +45,7 @@ class AntelopeWriterStep extends PublishAwareStep implements DataImportStepInter
         );
         $antelopeLocationIds = [];
         foreach ($antelopeLocationCollection->getAntelopeLocations() as $location) {
-            $antelopeLocationIds[$location->getIdAntelopeLocation()] = $location;
+            $antelopeLocationIds[$location->getIdAntelopeLocation()] = $location->getIdAntelopeLocation();
         }
         self::$antelopeLocations = $antelopeLocationIds;
     }
@@ -59,7 +59,7 @@ class AntelopeWriterStep extends PublishAwareStep implements DataImportStepInter
             ->filterByName($dataSet[AntelopeDataSetInterface::COLUMN_NAME])
             ->findOneOrCreate();
         $idLocation = (int)$dataSet[AntelopeDataSetInterface::COLUMN_ID_LOCATION];
-        $idLocation = static::$antelopeLocations[$idLocation] ?? array_rand(static::$antelopeLocations);
+        $idLocation = static::$antelopeLocations[$idLocation] ?? array_rand(static::$antelopeLocations, 1);
         $antelopeEntity->setFkAntelopeLocation($idLocation);
         $antelopeEntity->setColor($dataSet[AntelopeDataSetInterface::COLUMN_COLOR]);
 
