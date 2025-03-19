@@ -10,6 +10,7 @@ namespace Pyz\Zed\Publisher;
 use Pyz\Shared\AntelopeLocationSearch\AntelopeLocationSearchConfig;
 use Pyz\Shared\AntelopeSearch\AntelopeSearchConfig;
 use Pyz\Zed\AntelopeLocationSearch\Communication\Plugin\Publisher\AntelopeLocationWritePublisherPlugin;
+use Pyz\Zed\AntelopeSearch\Communication\Plugin\Publisher\AntelopePublisherTriggerPlugin;
 use Pyz\Zed\AntelopeSearch\Communication\Plugin\Publisher\AntelopeWritePublisherPlugin;
 use Spryker\Shared\GlossaryStorage\GlossaryStorageConfig;
 use Spryker\Shared\PublishAndSynchronizeHealthCheck\PublishAndSynchronizeHealthCheckConfig;
@@ -405,7 +406,7 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
     protected function getPublisherTriggerPlugins(): array
     {
         return [
-
+            new AntelopePublisherTriggerPlugin(),
             new GlossaryPublisherTriggerPlugin(),
             new ProductRelationPublisherTriggerPlugin(),
             new ProductAbstractLabelPublisherTriggerPlugin(),

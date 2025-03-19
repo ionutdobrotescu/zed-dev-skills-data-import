@@ -7,6 +7,7 @@
 
 namespace Pyz\Zed\Synchronization;
 
+use Pyz\Zed\AntelopeSearch\Communication\Plugin\Synchronization\AntelopeSynchronizationDataBulkRepositoryPlugin;
 use Spryker\Zed\AssetStorage\Communication\Plugin\Synchronization\AssetStorageSynchronizationDataPlugin;
 use Spryker\Zed\AvailabilityStorage\Communication\Plugin\Synchronization\AvailabilitySynchronizationDataPlugin;
 use Spryker\Zed\CategoryImageStorage\Communication\Plugin\Synchronization\CategoryImageSynchronizationDataBulkPlugin;
@@ -59,6 +60,7 @@ use Spryker\Zed\ProductStorage\Communication\Plugin\Synchronization\ProductAbstr
 use Spryker\Zed\ProductStorage\Communication\Plugin\Synchronization\ProductConcreteSynchronizationDataPlugin;
 use Spryker\Zed\SalesReturnSearch\Communication\Plugin\Synchronization\ReturnReasonSynchronizationDataBulkRepositoryPlugin;
 use Spryker\Zed\SearchHttp\Communication\Plugin\Synchronization\SearchHttpSynchronizationDataPlugin;
+use Spryker\Zed\ServicePointSearch\Communication\Plugin\Synchronization\ServicePointSynchronizationDataBulkRepositoryPlugin;
 use Spryker\Zed\StoreStorage\Communication\Plugin\Synchronization\StoreSynchronizationDataPlugin;
 use Spryker\Zed\Synchronization\Communication\Plugin\Synchronization\SynchronizationDataQueryExpanderWhereBetweenStrategyPlugin;
 use Spryker\Zed\Synchronization\SynchronizationDependencyProvider as SprykerSynchronizationDependencyProvider;
@@ -76,6 +78,8 @@ class SynchronizationDependencyProvider extends SprykerSynchronizationDependency
     protected function getSynchronizationDataPlugins(): array
     {
         return [
+            new AntelopeSynchronizationDataBulkRepositoryPlugin(),
+            new ServicePointSynchronizationDataBulkRepositoryPlugin(),
             new CategoryPageSynchronizationDataBulkRepositoryPlugin(),
             new CmsPageSynchronizationDataPlugin(),
             new ProductPageSynchronizationDataPlugin(),
@@ -140,7 +144,8 @@ class SynchronizationDependencyProvider extends SprykerSynchronizationDependency
     /**
      * @return \Spryker\Zed\SynchronizationExtension\Dependency\Plugin\SynchronizationDataQueryExpanderStrategyPluginInterface
      */
-    protected function getSynchronizationDataQueryExpanderStrategyPlugin(): SynchronizationDataQueryExpanderStrategyPluginInterface
+    protected function getSynchronizationDataQueryExpanderStrategyPlugin(
+    ): SynchronizationDataQueryExpanderStrategyPluginInterface
     {
         return new SynchronizationDataQueryExpanderWhereBetweenStrategyPlugin();
     }

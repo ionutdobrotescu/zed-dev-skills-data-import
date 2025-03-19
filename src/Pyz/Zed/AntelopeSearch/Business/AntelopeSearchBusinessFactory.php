@@ -16,10 +16,10 @@ use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 /**
  * @method \Pyz\Zed\AntelopeSearch\Persistence\AntelopeSearchRepositoryInterface getRepository()
  * @method \Pyz\Zed\AntelopeSearch\Persistence\AntelopeSearchEntityManagerInterface getEntityManager()
+ * @method \Pyz\Zed\AntelopeSearch\AntelopeSearchConfig getConfig()
  */
 class AntelopeSearchBusinessFactory extends AbstractBusinessFactory
 {
-
     public function createAntelopeSearchWriter(): AntelopeSearchWriter
     {
         return new AntelopeSearchWriter(
@@ -30,13 +30,11 @@ class AntelopeSearchBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-
     public function getEventBehaviorFacade(): EventBehaviorFacadeInterface
     {
         return $this->getProvidedDependency(AntelopeSearchDependencyProvider::FACADE_EVENT_BEHAVIOR);
     }
 
-  
     public function getAntelopeFacade(): AntelopeFacadeInterface
     {
         return $this->getProvidedDependency(AntelopeSearchDependencyProvider::FACADE_ANTELOPE);

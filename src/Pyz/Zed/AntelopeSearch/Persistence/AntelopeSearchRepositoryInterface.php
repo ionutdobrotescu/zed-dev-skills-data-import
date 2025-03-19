@@ -8,6 +8,7 @@
 namespace Pyz\Zed\AntelopeSearch\Persistence;
 
 use Generated\Shared\Transfer\AntelopeSearchCriteriaTransfer;
+use Generated\Shared\Transfer\FilterTransfer;
 
 interface AntelopeSearchRepositoryInterface
 {
@@ -17,4 +18,9 @@ interface AntelopeSearchRepositoryInterface
      * @return array<\Generated\Shared\Transfer\AntelopeSearchTransfer>
      */
     public function getAntelopeSearches(AntelopeSearchCriteriaTransfer $antelopeSearchCriteriaTransfer): array;
+
+    public function getAntelopeSearchSynchronizationDataTransfersByIds(
+        FilterTransfer $filterTransfer,
+        array $servicePointIds = [],
+    ): array;
 }

@@ -82,4 +82,6 @@ class AntelopeSearchConfig extends AbstractBundleConfig
     public const string ANTELOPE_UNPUBLISH = 'AntelopeSearch.antelope.unpublish';
 
     public const int ANTELOPE_PUBLISH_BATCH_SIZE = 100;
+
+    public const string ANTELOPE_RESOURCE_NAME = 'antelope';
 }

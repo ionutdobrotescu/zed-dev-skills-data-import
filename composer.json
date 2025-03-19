@@ -61,6 +61,7 @@
         "spryker-feature/return-management": "^202410.0",
         "spryker-feature/scheduled-prices": "^202410.0",
         "spryker-feature/search": "^202410.0",
+        "spryker-feature/service-points": "202410.0",
         "spryker-feature/shipment": "^202410.0",
         "spryker-feature/spryker-core": "^202410.0",
         "spryker-feature/spryker-core-back-office": "^202410.0",

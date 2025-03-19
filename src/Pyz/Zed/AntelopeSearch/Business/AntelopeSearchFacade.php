@@ -7,6 +7,7 @@
 
 namespace Pyz\Zed\AntelopeSearch\Business;
 
+use Generated\Shared\Transfer\FilterTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 
 /**
@@ -29,5 +30,15 @@ class AntelopeSearchFacade extends AbstractFacade implements AntelopeSearchFacad
     {
         $this->getFactory()->createAntelopeSearchWriter()
             ->writeCollectionByAntelopeEvents($eventTransfers);
+    }
+
+    public function getAntelopeSearchSynchronizationDataTransfersByIds(
+        FilterTransfer $filterTransfer,
+        array $antelopeSearchIds = [],
+    ): array {
+        return $this->getRepository()->getAntelopeSearchSynchronizationDataTransfersByIds(
+            $filterTransfer,
+            $antelopeSearchIds,
+        );
     }
 }

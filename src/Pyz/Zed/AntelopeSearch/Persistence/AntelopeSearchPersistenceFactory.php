@@ -14,6 +14,7 @@ use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 /**
  * @method \Pyz\Zed\AntelopeSearch\Persistence\AntelopeSearchRepositoryInterface getRepository()
  * @method \Pyz\Zed\AntelopeSearch\Persistence\AntelopeSearchEntityManagerInterface getEntityManager()
+ * @method \Pyz\Zed\AntelopeSearch\AntelopeSearchConfig getConfig()
  */
 class AntelopeSearchPersistenceFactory extends AbstractPersistenceFactory
 {

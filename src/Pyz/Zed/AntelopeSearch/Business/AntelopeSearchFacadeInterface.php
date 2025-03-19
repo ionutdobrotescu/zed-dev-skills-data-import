@@ -7,6 +7,8 @@
 
 namespace Pyz\Zed\AntelopeSearch\Business;
 
+use Generated\Shared\Transfer\FilterTransfer;
+
 interface AntelopeSearchFacadeInterface
 {
     /**
@@ -22,4 +24,9 @@ interface AntelopeSearchFacadeInterface
      * @return void
      */
     public function writeCollectionByAntelopeEvents(array $eventTransfers): void;
+
+    public function getAntelopeSearchSynchronizationDataTransfersByIds(
+        FilterTransfer $filterTransfer,
+        array $antelopeSearchIds = [],
+    ): array;
 }

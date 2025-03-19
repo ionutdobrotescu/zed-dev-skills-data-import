@@ -13,6 +13,8 @@ use Spryker\Zed\PublisherExtension\Dependency\Plugin\PublisherPluginInterface;
 
 /**
  * @method \Pyz\Zed\AntelopeSearch\Business\AntelopeSearchFacadeInterface getFacade()
+ * @method \Pyz\Zed\AntelopeSearch\AntelopeSearchConfig getConfig()
+ * @method \Pyz\Zed\AntelopeSearch\Communication\AntelopeSearchCommunicationFactory getFactory()
  */
 class AntelopeWritePublisherPlugin extends AbstractPlugin implements PublisherPluginInterface
 {

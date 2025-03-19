@@ -58,4 +58,11 @@ class AntelopeSearchDependencyProvider extends AbstractBundleDependencyProvider
 
         return $container;
     }
+
+    public function provideCommunicationLayerDependencies(Container $container)
+    {
+        $this->addAntelopeFacade($container);
+
+        return $container;
+    }
 }
