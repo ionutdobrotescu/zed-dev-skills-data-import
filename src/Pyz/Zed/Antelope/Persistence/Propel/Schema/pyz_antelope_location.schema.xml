@@ -4,6 +4,7 @@
           namespace="Orm\Zed\AntelopeLocation\Persistence"
           package="src.Orm.Zed.AntelopeLocation.Persistence">
 
+
     <table name="pyz_antelope_location" idMethod="native" allowPkInsert="true"
            phpName="PyzAntelopeLocation">
         <column name="id_antelope_location" required="true" type="INTEGER"

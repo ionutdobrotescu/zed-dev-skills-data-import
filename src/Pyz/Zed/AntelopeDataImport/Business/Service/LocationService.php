@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Pyz\Zed\AntelopeDataImport\Business\Service;
 
-use Orm\Zed\Antelope\Persistence\PyzAntelopeLocation;
-use Orm\Zed\Antelope\Persistence\PyzAntelopeLocationQuery;
+use Orm\Zed\AntelopeLocation\Persistence\PyzAntelopeLocation;
+use Orm\Zed\AntelopeLocation\Persistence\PyzAntelopeLocationQuery;
 use Spryker\Zed\DataImport\Dependency\Propel\DataImportToPropelConnectionInterface;
 
 class LocationService
 {
-    protected const DEFAULT_LOCATION_NAME = 'Savannah';
+    protected const string DEFAULT_LOCATION_NAME = 'Savannah';
 
     public function __construct(
         protected DataImportToPropelConnectionInterface $propelConnection

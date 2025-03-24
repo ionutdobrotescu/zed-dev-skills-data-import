@@ -1,14 +1,14 @@
 version: "0.1"
 
-namespace: zed-dev-skill_dev
+namespace: spryker-plugins
 tag: 'dev'
 
 environment: docker.dev
 image:
-    tag: spryker/php:8.2
+    tag: spryker/php:8.3
     php:
         enabled-extensions:
-            - blackfire
+           # - blackfire
     environment:
         #AOP
         SPRYKER_AOP_INFRASTRUCTURE: '{
