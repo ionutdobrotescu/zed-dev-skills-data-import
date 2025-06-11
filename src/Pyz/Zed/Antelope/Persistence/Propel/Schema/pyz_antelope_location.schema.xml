@@ -10,6 +10,11 @@
         <unique name="pyz_antelope_location_name">
             <unique-column name="location_name"/>
         </unique>
+
+        <behavior name="event">
+            <parameter name="pyz_antelope_location_all" column="*"/>
+        </behavior>
+
         <id-method-parameter value="pyz_antelope_location_pk_seq"/>
     </table>
 
