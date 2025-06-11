@@ -4,6 +4,7 @@ namespace Pyz\Zed\Antelope\Business;
 
 use Pyz\Zed\Antelope\Business\Reader\AntelopeLocationReader;
 use Pyz\Zed\Antelope\Business\Reader\AntelopeReader;
+use Pyz\Zed\Antelope\Business\Writer\AntelopeLocationWriter;
 use Pyz\Zed\Antelope\Business\Writer\AntelopeWriter;
 use Pyz\Zed\Antelope\Persistence\AntelopeEntityManagerInterface;
 use Pyz\Zed\Antelope\Persistence\AntelopeRepositoryInterface;
